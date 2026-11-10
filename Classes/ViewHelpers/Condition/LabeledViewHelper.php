@@ -28,7 +28,7 @@ final class LabeledViewHelper extends AbstractConditionViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerArgument('record', 'mixed', 'Extbase model, record array (+ table) or Record object (TYPO3 13.4+)');
+        $this->registerArgument('record', 'mixed', 'Extbase model, record array (+ table), Record object (TYPO3 13.4+) or FAL file/file reference');
         $this->registerArgument('table', 'string', 'Table name (required for arrays without Record API)');
         $this->registerArgument('uid', 'int', 'Record uid (together with "table")');
     }

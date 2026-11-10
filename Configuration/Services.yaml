@@ -22,6 +22,11 @@ services:
       - '../Classes/Frontend/LabelSettings.php'
     public: true
 
+  # Instantiated by the core via GeneralUtility::makeInstance()
+  FourViewture\AiLabeling\Resource\:
+    resource: '../Classes/Resource/*'
+    public: true
+
   FourViewture\AiLabeling\EventListener\FileAiDetectionListener:
     tags:
       - name: event.listener

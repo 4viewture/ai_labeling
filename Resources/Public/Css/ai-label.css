@@ -185,7 +185,7 @@
         anchor-scope: --ai-label-media;
     }
 
-    :is(video, iframe, object, embed):has(+ .ai-label--overlay) {
+    :is(video, iframe, object, embed, img):has(+ .ai-label--overlay) {
         anchor-name: --ai-label-media;
     }
 

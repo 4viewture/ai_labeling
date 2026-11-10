@@ -145,6 +145,32 @@ Further properties: `--ai-label-font-size` (0.875em), `--ai-label-radius`, `--ai
 `stdWrap` has only one `postUserFunc`: if your site already uses `tt_content.stdWrap.postUserFunc`,
 set `content.enable = 0` and call the labeler from your own function.
 
+### Video, audio, online media
+
+`AiLabelMediaRenderer` (priority 1000, registered like the core renderers via
+`RendererRegistry::registerRendererClass()`) decorates the renderer that would render a labelled file
+(core `VideoTagRenderer`, `AudioTagRenderer`, `YouTubeRenderer`, `VimeoRenderer` or any other
+renderer): it outputs the **unchanged** player HTML followed by the label component.
+
+- Video / YouTube / Vimeo: `ai-label--overlay`. Inside `@supports (anchor-name: --x) and (anchor-scope: --x)`
+  the label is positioned via CSS anchor positioning at the **top right** of the player
+  (Code of Practice, Sub-measure 1.2.2 a), out of flow, `pointer-events: none`, never over the control
+  bar (WCAG 2.4.11). `anchor-scope` binds each label to its own player. Without support: small static
+  label right after the player.
+- Audio (and `media.overlay = 0`): visible label after the player (`ai-label--media`). The spoken
+  disclaimer at the beginning of the recording is editorial work (see guide).
+
+**Two-click / privacy placeholders** (e.g. EXT:video_shariff) render the player HTML only after the
+click; the label is part of it, but the preview before the click is not a labelled FAL image. Add the
+label to the placeholder in your template override, e.g. in `Partials/Media/Type/Video.html` of
+video_shariff after `<f:image … />` inside the play link:
+
+```html
+<ai:label record="{file}" variant="overlay" />
+```
+
+(`variant="overlay"` anchors to the preceding `<img>`; the label text becomes part of the link name.)
+
 ### ViewHelpers (news and other records)
 
 Namespace `ai` is registered globally (`http://typo3.org/ns/FourViewture/AiLabeling/ViewHelpers`).
@@ -155,6 +181,7 @@ Namespace `ai` is registered globally (`http://typo3.org/ns/FourViewture/AiLabel
 <ai:label table="tx_foo" uid="{uid}" />                <!-- uid, overlaid into the frontend language -->
 <ai:label record="{record}" />                         <!-- TYPO3 13.4+ Record object -->
 <ai:label record="{newsItem}" textVisible="0" />       <!-- icon only, text for screen readers -->
+<ai:label record="{file}" variant="overlay" />         <!-- FAL file / file reference (overlay|media) -->
 
 <ai:condition.labeled record="{newsItem}">
     <f:then>…</f:then>

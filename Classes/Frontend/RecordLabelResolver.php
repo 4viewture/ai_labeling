@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
@@ -29,6 +30,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper;
  * - TYPO3 13.4+/14 Record API (TYPO3\CMS\Core\Domain\RecordInterface): table = getMainType(),
  *   fields via has()/get(), else loaded by localized uid.
  * - table + uid: loaded and overlaid into the current frontend language (PageRepository).
+ * - FAL File / FileReference: label of the (original) file, see FileLabelResolver.
  *
  * DataMap: DataMapFactory::buildDataMap() exists in 12.4, 13.4 and 14.3 (DataMapper::getDataMap()
  * as fallback); both are @internal Extbase API, so an explicit "table" always wins.
@@ -41,10 +43,15 @@ final class RecordLabelResolver
     public function __construct(
         private readonly LabelRenderer $labelRenderer,
         private readonly FrontendContext $context,
+        private readonly FileLabelResolver $fileLabelResolver,
     ) {}
 
     public function resolve(mixed $record = null, ?string $table = null, ?int $uid = null, ?ServerRequestInterface $request = null): ?Label
     {
+        if ($record instanceof FileInterface) {
+            // FAL file / file reference (e.g. custom media templates, privacy placeholders of videos)
+            return $this->fileLabelResolver->labelForFile($record, $request);
+        }
         $resolved = $this->resolveRow($record, $table, $uid, $request);
         if ($resolved === null) {
             return null;

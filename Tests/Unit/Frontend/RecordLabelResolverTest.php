@@ -6,6 +6,7 @@ namespace FourViewture\AiLabeling\Tests\Unit\Frontend;
 
 use FourViewture\AiLabeling\Domain\Label;
 use FourViewture\AiLabeling\Domain\Labeling as L;
+use FourViewture\AiLabeling\Frontend\FileLabelResolver;
 use FourViewture\AiLabeling\Frontend\FrontendContext;
 use FourViewture\AiLabeling\Frontend\LabelRenderer;
 use FourViewture\AiLabeling\Frontend\RecordLabelResolver;
@@ -26,7 +27,8 @@ final class RecordLabelResolverTest extends TestCase
         $languageService->method('sL')->willReturn('Dieser Text wurde mit Hilfe von KI erzeugt.');
         $GLOBALS['LANG'] = $languageService;
         $context = new FrontendContext($this->createStub(LanguageServiceFactory::class));
-        $this->subject = new RecordLabelResolver(new LabelRenderer($context, new LabelTextResolver()), $context);
+        $renderer = new LabelRenderer($context, new LabelTextResolver());
+        $this->subject = new RecordLabelResolver($renderer, $context, new FileLabelResolver($renderer, $context));
     }
 
     protected function tearDown(): void

@@ -23,3 +23,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Core\Imaging\IconFactory::c
 // Global Fluid namespace "ai" (http://typo3.org/ns/FourViewture/AiLabeling/ViewHelpers also works as xmlns)
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['ai'] ??= [];
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['ai'][] = 'FourViewture\\AiLabeling\\ViewHelpers';
+
+// Video / audio / online media: decorate the renderer of labelled files (12.4–14.3 register renderers here)
+\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Resource\Rendering\RendererRegistry::class)
+    ->registerRendererClass(\FourViewture\AiLabeling\Resource\Rendering\AiLabelMediaRenderer::class);
