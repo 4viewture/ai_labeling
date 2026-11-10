@@ -145,6 +145,35 @@ Further properties: `--ai-label-font-size` (0.875em), `--ai-label-radius`, `--ai
 `stdWrap` has only one `postUserFunc`: if your site already uses `tt_content.stdWrap.postUserFunc`,
 set `content.enable = 0` and call the labeler from your own function.
 
+### Images: burned-in symbol
+
+FAL processor `AiLabelImageProcessor` (`$GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['processors']`, after
+`SvgImageProcessor`/`DeferredBackendImageProcessor`, before `OnlineMediaPreviewProcessor`/`LocalImageProcessor`)
+composites the compact EU **"AI" symbol** (not the "AI GENERATED" text icon – no images of text,
+WCAG 1.4.5) onto processed images of labelled files:
+
+- `Image.CropScaleMask` / `Image.Preview`, not in backend requests (no backend previews), jpg/png/webp/
+  static gif, and the preview images of YouTube/Vimeo files. SVG and animated GIF/WebP are skipped.
+- Default **top right** (Code of Practice, Sub-measure 1.2.2 a), 8 % of the shorter edge, 24–96 px,
+  margin 2 % (min 4 px). Images with a shorter edge below 3 × `minSize` are not burned (alt text and
+  caption still label them). The Code sets no numeric sizes (Measure 1.1 c) – adjust via constants.
+- Black or white variant by **measured contrast** of the target corner (black against the darkest 5 %,
+  white against the brightest 5 % of 576 samples, WCAG relative luminance); if neither reaches 3:1, the
+  black symbol gets an opaque white backing plate.
+- If the core would deliver the original unprocessed (no resize needed), a derived file is created.
+- GD, Imagick as fallback. Errors: no symbol, warning in the log. PNGs are generated from the official
+  SVGs by `Build/rasterize-icons.sh`. GD re-encodes the image (EXIF/ICC are not kept).
+- **Invalidation:** when `tx_ailabeling_active`/`involvement` of a file change (DataHandler hook for
+  `sys_file_metadata`, `AutoLabeler`/`ailabeling:scan`), all processed files of the original are deleted
+  (files and `sys_file_processedfile` rows) and the page cache of all pages referencing the file is
+  flushed (`sys_file_reference` + `sys_refindex` → tags `pageId_<pid>`, `<table>_<uid>`,
+  `tx_news_uid_<uid>`/`tx_news_pid_<pid>`). Label text changes flush the pages only.
+- Changing `images.*` settings does not change the processed file names: clear processed files
+  afterwards (*Maintenance → Remove Temporary Assets*, or `vendor/bin/typo3 cleanup:localprocessedfiles`).
+- Processed files are shared between sites/contexts with the same processing configuration; a backend
+  request never burns the symbol in, so a file processed there with an identical configuration first
+  stays without symbol until it is invalidated.
+
 ### Video, audio, online media
 
 `AiLabelMediaRenderer` (priority 1000, registered like the core renderers via
@@ -251,7 +280,10 @@ Classes/
   ViewHelpers/, DataProcessing/      <ai:label>, <ai:condition.labeled>, dataProcessing ai-label
   EventListener/                     TCA/SQL for all tables, detection, icon overlays, list module select
   Service/RecordOverlay.php          overlay decision for record icons
-  Hooks/DataHandlerHook.php          persist computed status on save
+  Hooks/DataHandlerHook.php          persist computed status on save, invalidate processed files/pages
+  Resource/                          AiLabelImageProcessor + ImageLabelCompositor (burn-in), AiLabelMediaRenderer
+  Imaging/Contrast.php               WCAG contrast, symbol variant and placement
+  Service/LabelInvalidator.php       processed files + page cache of a file
   Form/Element/GuideInformation.php  FormEngine fieldWizard: guide + live assessment
   Command/ScanCommand.php            ailabeling:scan
 ```

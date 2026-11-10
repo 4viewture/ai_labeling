@@ -7,6 +7,7 @@ namespace FourViewture\AiLabeling\Hooks;
 use FourViewture\AiLabeling\Configuration\LabelingTables;
 use FourViewture\AiLabeling\Domain\Labeling;
 use FourViewture\AiLabeling\Service\LabelEvaluator;
+use FourViewture\AiLabeling\Service\LabelInvalidator;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -21,6 +22,9 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  */
 final class DataHandlerHook
 {
+    /** @var array<int, bool> file uid => processed files affected (false: label text only) */
+    private array $changedFiles = [];
+
     /**
      * @param array<string, mixed> $fieldArray
      */
@@ -41,6 +45,10 @@ final class DataHandlerHook
         }
         $touched = array_intersect(Labeling::DECISION_FIELDS, array_keys($fieldArray)) !== [];
         if ($status === 'update' && !$touched) {
+            if ($table === 'sys_file_metadata') {
+                // e.g. only the label text changed
+                $this->rememberChangedFile($existing, $fieldArray);
+            }
             return;
         }
 
@@ -56,6 +64,46 @@ final class DataHandlerHook
         if (in_array('suppressedRequired', $assessment->reasons, true)) {
             $this->addFlashMessage();
         }
+
+        if ($table === 'sys_file_metadata') {
+            $this->rememberChangedFile($existing, $fieldArray);
+        }
+    }
+
+    /**
+     * Frontend output depends on active/involvement (burned-in symbol) and the label text (alt text,
+     * captions): remember the file, invalidate after all operations (processed files + page cache).
+     *
+     * @param array<string, mixed> $existing
+     * @param array<string, mixed> $fieldArray
+     */
+    private function rememberChangedFile(array $existing, array $fieldArray): void
+    {
+        $fileUid = (int)($existing['file'] ?? $fieldArray['file'] ?? 0);
+        if ($fileUid <= 0) {
+            return;
+        }
+        $changed = static fn(string $field): bool => array_key_exists($field, $fieldArray)
+            && (string)$fieldArray[$field] !== (string)($existing[$field] ?? '');
+        $wasActive = (int)($existing[Labeling::F_ACTIVE] ?? 0) === 1;
+        $isActive = (int)($fieldArray[Labeling::F_ACTIVE] ?? $existing[Labeling::F_ACTIVE] ?? 0) === 1;
+        $image = $changed(Labeling::F_ACTIVE) || (($wasActive || $isActive) && $changed(Labeling::F_INVOLVEMENT));
+        $text = ($wasActive || $isActive) && $changed(Labeling::F_LABEL_TEXT);
+        if ($image || $text) {
+            $this->changedFiles[$fileUid] = ($this->changedFiles[$fileUid] ?? false) || $image;
+        }
+    }
+
+    public function processDatamap_afterAllOperations(DataHandler $dataHandler): void
+    {
+        if ($this->changedFiles === []) {
+            return;
+        }
+        $invalidator = GeneralUtility::makeInstance(LabelInvalidator::class);
+        foreach ($this->changedFiles as $fileUid => $processedFiles) {
+            $invalidator->invalidateFile($fileUid, $processedFiles);
+        }
+        $this->changedFiles = [];
     }
 
     private function addFlashMessage(): void

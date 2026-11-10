@@ -22,6 +22,10 @@ services:
       - '../Classes/Frontend/LabelSettings.php'
     public: true
 
+  # Also used by the DataHandler hook (makeInstance)
+  FourViewture\AiLabeling\Service\LabelInvalidator:
+    public: true
+
   # Instantiated by the core via GeneralUtility::makeInstance()
   FourViewture\AiLabeling\Resource\:
     resource: '../Classes/Resource/*'

@@ -31,6 +31,7 @@ final class AutoLabeler implements LoggerAwareInterface
     public function __construct(
         private readonly ExtensionConfiguration $extensionConfiguration,
         private readonly LabelEvaluator $evaluator,
+        private readonly LabelInvalidator $invalidator,
     ) {}
 
     public function isAutoDetectEnabled(): bool
@@ -89,6 +90,13 @@ final class AutoLabeler implements LoggerAwareInterface
         $values = array_merge($values, $assessment->toFields());
 
         $metaData->add($values)->save();
+
+        // Label state changed -> processed files (burned-in symbol) and cached pages are outdated
+        if ((int)($current[Labeling::F_ACTIVE] ?? 0) !== (int)($values[Labeling::F_ACTIVE] ?? $current[Labeling::F_ACTIVE] ?? 0)
+            || (int)($current[Labeling::F_INVOLVEMENT] ?? 0) !== (int)($values[Labeling::F_INVOLVEMENT] ?? $current[Labeling::F_INVOLVEMENT] ?? 0)
+        ) {
+            $this->invalidator->invalidateFile($file->getUid());
+        }
 
         $this->logger?->info('AI content detected in file {uid} ({identifier}): {evidence}', [
             'uid' => $file->getUid(),

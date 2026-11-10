@@ -27,3 +27,12 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['ai'][] = 'FourViewtur
 // Video / audio / online media: decorate the renderer of labelled files (12.4–14.3 register renderers here)
 \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Resource\Rendering\RendererRegistry::class)
     ->registerRendererClass(\FourViewture\AiLabeling\Resource\Rendering\AiLabelMediaRenderer::class);
+
+// Burn the EU "AI" symbol into processed images of labelled files. Keys of the core processors are
+// identical in 12.4, 13.4 and 14.3: SvgImageProcessor -> DeferredBackendImageProcessor ->
+// OnlineMediaPreviewProcessor -> LocalImageProcessor.
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['processors']['AiLabelImageProcessor'] = [
+    'className' => \FourViewture\AiLabeling\Resource\Processing\AiLabelImageProcessor::class,
+    'after' => ['SvgImageProcessor', 'DeferredBackendImageProcessor'],
+    'before' => ['OnlineMediaPreviewProcessor', 'LocalImageProcessor'],
+];
