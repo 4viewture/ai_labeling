@@ -174,6 +174,20 @@ WCAG 1.4.5) onto processed images of labelled files:
   request never burns the symbol in, so a file processed there with an identical configuration first
   stays without symbol until it is invalidated.
 
+### Images: alt text and captions
+
+Listener on `AfterCacheableContentIsGeneratedEvent` (once per generated page; content API:
+`getContent()/setContent()` in TYPO3 14, `getController()->content` in 12.4/13.4):
+
+- every `<img>` whose `src`, `srcset`, `data-src`, `data-srcset` (or `<source srcset>` of its `<picture>`)
+  points to a labelled file – original or processed – gets ` (KI-generiert)` (label text in the
+  frontend language) appended to a **non-empty** `alt`. `alt=""` (decorative) stays untouched.
+- inside `<figure>` with `<figcaption>` the label component is appended to the caption (once per figure).
+- URL → file: request-scoped registry fed by `AfterFileProcessingEvent` (dispatched for new and existing
+  processed files), DB fallback for other URLs (local storages, `sys_file_processedfile` / `sys_file`,
+  filtered by `tx_ailabeling_active`). Only the matched tags are edited (attribute level), no DOM round trip.
+- Non-cacheable output (`USER_INT`) is not rewritten.
+
 ### Video, audio, online media
 
 `AiLabelMediaRenderer` (priority 1000, registered like the core renderers via
@@ -278,7 +292,8 @@ Classes/
   Frontend/                          LabelRenderer (component), ContentElementLabeler, RecordLabelResolver, settings
   Html/                              targeted string insertion helpers (no DOM round trip)
   ViewHelpers/, DataProcessing/      <ai:label>, <ai:condition.labeled>, dataProcessing ai-label
-  EventListener/                     TCA/SQL for all tables, detection, icon overlays, list module select
+  EventListener/                     TCA/SQL for all tables, detection, icon overlays, list module select,
+                                     image URL registry + alt/figcaption rewriting
   Service/RecordOverlay.php          overlay decision for record icons
   Hooks/DataHandlerHook.php          persist computed status on save, invalidate processed files/pages
   Resource/                          AiLabelImageProcessor + ImageLabelCompositor (burn-in), AiLabelMediaRenderer

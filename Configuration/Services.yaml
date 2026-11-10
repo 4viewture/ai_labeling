@@ -97,3 +97,16 @@ services:
     tags:
       - name: data.processor
         identifier: 'ai-label'
+
+  # Alt text / figcaption of labelled images
+  FourViewture\AiLabeling\EventListener\RegisterLabelledImageUrl:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/register-labelled-image-url'
+        event: TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent
+
+  FourViewture\AiLabeling\EventListener\LabelImagesInContent:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/label-images-in-content'
+        event: TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent
