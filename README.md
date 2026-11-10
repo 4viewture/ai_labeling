@@ -303,9 +303,21 @@ Classes/
   Command/ScanCommand.php            ailabeling:scan
 ```
 
-Compatibility notes: no PHP attributes for listeners/commands (v12), no Fluid `StandaloneView`
-(removed in v14), FormEngine node without own constructor (v12 constructor / v13+ `setData()`),
-file types as integers instead of `AbstractFile::FILETYPE_*`.
+Compatibility notes (verified against the core sources of 12.4, 13.4 and 14.3; Fluid 2.15 / 5.x):
+
+- No PHP attributes for listeners/commands (v12) – everything in `Configuration/Services.yaml`.
+  Exception: `#[AsAllowedCallable]` on `ContentElementLabeler::process()` – required for TypoScript
+  callables in TYPO3 14 (Breaking #108054); the attribute is never instantiated in 12/13.
+- No Fluid `StandaloneView` (removed in v14), file types as integers instead of `AbstractFile::FILETYPE_*`.
+- FormEngine node without own constructor (v12 constructor / v13+ `setData()`).
+- `AfterCacheableContentIsGeneratedEvent`: `getContent()/setContent()` only in 14, 12.4/13.4 use
+  `getController()->content`.
+- `LocalImageProcessor::processTaskWithLocalFile()`: public in 12/13, protected in 14 (the processor is a subclass).
+- `TaskInterface::getTargetFileExtension()` only in 13.4+ (12.4: `AbstractTask`).
+- Rendering context request: attribute `ServerRequestInterface` (13.4/14.3), `getRequest()` (12.4).
+- Extbase table of a model: `DataMapFactory::buildDataMap()` (12.4–14.3, `@internal`), `DataMapper::getDataMap()` fallback.
+- File renderers via `RendererRegistry::registerRendererClass()` (12.4–14.3; TYPO3 15 uses tagged services).
+- Site set enums as map (`value: label`): array in 13.4, object in 14.x – both read.
 
 ## Limitations
 
@@ -324,4 +336,10 @@ file types as integers instead of `AbstractFile::FILETYPE_*`.
 vendor/bin/phpunit Tests/Unit
 ```
 
-The unit tests cover the decision logic and the detector (synthetic JPEG/XMP, PNG chunks, C2PA/CBOR, large files).
+The unit tests cover the decision logic, the detector (synthetic JPEG/XMP, PNG chunks, C2PA/CBOR,
+large files), the label component and settings, the content element insertion rules (fixtures:
+fluid_styled_content 12–14, `frame_class = none`, bootstrap_package, b13/container, empty output),
+alt/figcaption rewriting, contrast/placement and GD compositing.
+
+Browser tests (Playwright + axe-core; desktop, 200 % zoom, 320 px, forced colors, text spacing):
+[Tests/Acceptance/README.md](Tests/Acceptance/README.md).

@@ -1,0 +1,7 @@
+{
+  "text-header": { "path": "/test/ai-label/text", "element": "#c101" },
+  "frame-none": { "path": "/test/ai-label/frame-none", "element": "#c102" },
+  "image": { "path": "/test/ai-label/image", "element": "#c103" },
+  "video": { "path": "/test/ai-label/video", "element": "#c104" },
+  "news-detail": { "path": "/test/ai-label/news/detail/ki-artikel", "element": ".news-single" }
+}

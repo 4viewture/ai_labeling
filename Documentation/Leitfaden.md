@@ -152,17 +152,80 @@ Kachelansicht mit Vorschaubildern ersetzt das Vorschaubild das Icon – dort ist
 ## 5. Wie wird gekennzeichnet? (Darstellung)
 
 - Die Kennzeichnung muss **klar erkennbar** und **spätestens beim ersten Kontakt** sichtbar sein.
-- **Bild:** fest eingebettet, etwa am Rand oder in einer Ecke
+- **Bild:** fest eingebettet, etwa am Rand oder in einer Ecke (Verhaltenskodex: z. B. oben rechts)
 - **Kurzes Video:** durchgehend sichtbar · **längeres Video:** zu Beginn, wiederholt und nach jedem Schnitt
 - **Livestream:** während der gesamten Übertragung
 - **Audio:** gesprochener Hinweis zu Beginn, im Player zusätzlich visuell
 - **Text:** einheitlich platziert, etwa über dem Text oder an der Überschrift
 - Die EU-Kommission stellt seit Juni 2026 kostenlose Icons „AI GENERATED“, „AI MODIFIED“ und „AI“
-  bereit (freiwillig). Eigene Kennzeichnungen sind zulässig, wenn sie fest in der Datei eingebettet
+  bereit (freiwillig). TYPO3 verwendet auf der Website das kompakte Symbol „AI“ mit dem
+  Kennzeichnungstext daneben. Eigene Kennzeichnungen sind zulässig, wenn sie fest in der Datei eingebettet
   oder als deutlich sichtbares Wasserzeichen umgesetzt sind.
 
-> Die Ausgabe im Frontend wird in einer späteren Version der Erweiterung umgesetzt. Bis dahin gilt:
-> Bei eingebetteten Bildern/Videos die Kennzeichnung im Zweifel direkt in die Datei einbetten.
+### 5a. So erscheint die Kennzeichnung auf der Website
+
+TYPO3 gibt die Kennzeichnung automatisch aus, sobald die Einschätzung „Wird gekennzeichnet“ ergibt
+(Feld *KI-Kennzeichnung aktiv*). Sie müssen dafür nichts im Text oder Bild ergänzen.
+
+| Inhalt | Darstellung auf der Website |
+|---|---|
+| **Inhaltselement** (Text, Text & Medien …) | Hinweis mit KI-Symbol direkt **unter der Überschrift**, ohne Überschrift am Anfang des Elements |
+| **Bild** | KI-Symbol **oben rechts im Bild** (fest eingebettet, bleibt beim Herunterladen erhalten), Alternativtext wird um „(KI-generiert)“ ergänzt, Hinweis in der **Bildunterschrift** |
+| **Video, YouTube, Vimeo** | Hinweis **oben rechts im Player**, während der gesamten Wiedergabe sichtbar, nie über der Steuerleiste; das Vorschaubild von YouTube/Vimeo erhält das KI-Symbol |
+| **Audio** | sichtbarer Hinweis unter dem Player – zusätzlich ist ein **gesprochener Hinweis** nötig (siehe unten) |
+| **News und andere Datensätze** | Hinweis an der Überschrift in Liste und Detailansicht (sofern das Template den Hinweis vorsieht – Integrator fragen) |
+
+Hinweise für die Redaktion:
+
+- **Kennzeichnungstext:** kurz, in einfacher Sprache, ohne Fachbegriffe und Abkürzungen außer „KI“.
+  Leer lassen = Standardtext. Der Text ist je Sprache übersetzbar; die Entscheidung *ob*
+  gekennzeichnet wird, gilt für alle Sprachen.
+- **Alternativtext pflegen:** Der Zusatz „(KI-generiert)“ wird nur an einen vorhandenen
+  Alternativtext angehängt. Ein leerer Alternativtext bedeutet „Schmuckbild“ und bleibt leer –
+  dann trägt nur das eingebettete Symbol (und ggf. die Bildunterschrift) die Kennzeichnung.
+- **Sehr kleine Bilder** (kürzere Kante unter ca. 72 px) erhalten kein eingebettetes Symbol, weil es
+  nicht lesbar wäre – Alternativtext und Bildunterschrift kennzeichnen sie trotzdem.
+- **Änderungen wirken sofort:** Wird eine Kennzeichnung gesetzt oder entfernt, erzeugt TYPO3 die
+  verkleinerten Bilder neu und leert den Cache der betroffenen Seiten. Das Originalbild in der
+  Dateiliste bleibt immer unverändert.
+- **Video mit Datenschutz-Vorschaltbild** (Zwei-Klick-Lösung): Der Hinweis im Player erscheint erst nach
+  dem Klick. Damit er schon vorher sichtbar ist, muss das Template des Vorschaltbilds angepasst werden
+  (Integrator, siehe README).
+
+### 5b. Audio: gesprochener Hinweis (redaktionelle Aufgabe)
+
+Bei reinen Audioinhalten verlangt der Verhaltenskodex der EU (Maßnahme 1.1 und 1.2.3) einen **kurzen
+gesprochenen Hinweis zu Beginn der Aufnahme**, in einfacher Sprache und in der Sprache des Inhalts.
+Bei langen Aufnahmen (z. B. Podcast) wird er in regelmäßigen Abständen und nach jeder Unterbrechung
+(z. B. Werbung) wiederholt. Das kann TYPO3 nicht automatisch – nehmen Sie den Hinweis beim Schnitt
+mit auf, zum Beispiel:
+
+> „Hinweis: Die Stimme in dieser Aufnahme wurde mit künstlicher Intelligenz erzeugt.“
+> „Diese Aufnahme enthält KI-generierte Inhalte.“
+
+Der sichtbare Hinweis unter dem Player ergänzt den gesprochenen Hinweis, ersetzt ihn aber nicht.
+
+**Längere Videos:** Der Hinweis im Player ist durchgehend sichtbar. Wird das Video auch außerhalb der
+Website gezeigt (z. B. direkt auf YouTube) oder heruntergeladen, betten Sie die Kennzeichnung
+zusätzlich im Schnittprogramm ein – zu Beginn, regelmäßig und nach Unterbrechungen.
+
+### 5c. Barrierefreiheit (WCAG 2.2 AA)
+
+Die Kennzeichnung ist so gebaut, dass alle sie wahrnehmen können:
+
+- Sie ist **echter Text** (kein Bild, kein Tooltip) und wird von Screenreadern vorgelesen; das
+  KI-Symbol daneben ist nur Dekoration.
+- **Kontrast:** Text mindestens 4,5 : 1, Symbol mindestens 3 : 1 – durch einen eigenen Hintergrund
+  unabhängig von der Seitenfarbe. Im eingebetteten Bild wählt TYPO3 automatisch das schwarze oder
+  weiße Symbol, bei unruhigem Hintergrund mit hellem Rand.
+- Funktioniert bei **200 % Zoom**, auf **schmalen Bildschirmen** (320 px), mit angepassten Abständen und
+  im **Hochkontrastmodus** von Windows.
+- Der Hinweis über Videos verdeckt nie die Steuerleiste und lässt Klicks durch.
+- Optional (Einstellung des Integrators): Schaltfläche mit weiterer Erklärung („zweite Ebene“),
+  per Tastatur bedienbar.
+
+Was Sie beitragen: aussagekräftige Alternativtexte, Bildunterschriften wo sinnvoll und kurze,
+verständliche Kennzeichnungstexte.
 
 ---
 
@@ -183,4 +246,6 @@ sich aber als Marke anmelden.
 2. Bild/Audio/Video: Bezug zu Realem **und** Täuschungspotenzial? → kennzeichnen
 3. Text: öffentliches Interesse **und** keine inhaltliche Prüfung? → kennzeichnen
 4. Produktbild: Produkt oder Nutzung durch KI verändert? → kennzeichnen
-5. Unsicher? → **kennzeichnen** (freiwillig ist immer erlaubt)
+5. Audio: gesprochenen Hinweis zu Beginn aufgenommen? (siehe 5b)
+6. Bild: Alternativtext gepflegt?
+7. Unsicher? → **kennzeichnen** (freiwillig ist immer erlaubt)
