@@ -82,3 +82,9 @@ services:
         command: 'ailabeling:scan'
         description: 'Detect AI-generated files from metadata and label them (EU AI Act Art. 50)'
         schedulable: true
+
+  # FLUIDTEMPLATE / PAGEVIEW: dataProcessing.10 = ai-label
+  FourViewture\AiLabeling\DataProcessing\AiLabelProcessor:
+    tags:
+      - name: data.processor
+        identifier: 'ai-label'

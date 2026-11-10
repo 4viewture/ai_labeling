@@ -87,6 +87,128 @@ Fields are `exclude => true` – grant them to editor groups (*Allowed excludefi
 | `tx_ailabeling_active` | bool | computed: **render a label in the frontend if 1** |
 | `tx_ailabeling_reasons` | csv | computed reason keys |
 
+## Frontend output
+
+Rendered only for records/files with `tx_ailabeling_active = 1`. Label type: `modified` if
+`tx_ailabeling_involvement = 2`, otherwise `generated`. Text: `tx_ailabeling_label_text` of the record,
+else the default text in the **site language of the request**.
+
+### Setup
+
+- TYPO3 12.4 – 14: include the static template **"AI Labeling: frontend output"**, or
+- TYPO3 13.4+: add the site set **`4viewture/ai-labeling`** to the site (`dependencies:` in
+  `config/sites/<site>/config.yaml` or the site module). Do not use both.
+
+| Constant / site setting (`plugin.tx_ailabeling.`) | Default | Meaning |
+|---|---|---|
+| `css.include` | 1 | include `ai-label.css` (`page.includeCSS`) |
+| `content.enable` | 1 | label content elements (`tt_content.stdWrap.postUserFunc`) |
+| `label.text` | `visible` | `hidden` = text only for screen readers (`ai-label__text--sr-only`), icon visible |
+| `label.secondLayer` | 0 | disclosure button with explanation (Popover API, `ai-label.js` keeps `aria-expanded` in sync) |
+| `images.burnIn` | 1 | burn the EU "AI" symbol into processed frontend images |
+| `images.position` | `top-right` | `top-right`, `top-left`, `bottom-right`, `bottom-left` |
+| `images.sizePercent` / `minSize` / `maxSize` | 8 / 24 / 96 | symbol size: % of the shorter edge, clamped (px) |
+| `images.altText` | 1 | append the label text to non-empty `alt`, add the label to `<figcaption>` |
+| `media.overlay` | 1 | label as overlay at the top of videos; 0 = label below the player |
+
+### Label component
+
+```html
+<span class="ai-label ai-label--generated" data-ai-label="generated">
+  <svg class="ai-label__icon" aria-hidden="true" focusable="false">…</svg>
+  <span class="ai-label__text">KI-generiert</span>
+</span>
+```
+
+Theming via custom properties on any ancestor (keep text contrast ≥ 4.5:1):
+
+```css
+:root { --ai-label-color: #fff; --ai-label-background: #e60005; --ai-label-border-color: #e60005; }
+/* or: <body class="ai-label-theme-red"> */
+```
+
+Further properties: `--ai-label-font-size` (0.875em), `--ai-label-radius`, `--ai-label-focus-color`,
+`--ai-label-overlay-offset`.
+
+### Content elements
+
+`tt_content.stdWrap.postUserFunc = FourViewture\AiLabeling\Frontend\ContentElementLabeler->process`
+(TypoScript of the extension, only if `content.enable = 1`). It never wraps existing markup:
+
+1. skips whitespace, comments, the empty anchors `<a id="c123"></a>` and empty spacer elements,
+2. adds `data-ai-label="generated|modified"` to the first real element,
+3. inserts the label after the heading inside `<header>` (or `.frame-header` of bootstrap_package),
+4. otherwise as first child of the first element (`<span class="ai-label-line">`, which takes a full
+   row inside flex/grid parents),
+5. without element (or for tables, lists, media, void elements) it prepends `<p class="ai-label-line">`.
+
+`stdWrap` has only one `postUserFunc`: if your site already uses `tt_content.stdWrap.postUserFunc`,
+set `content.enable = 0` and call the labeler from your own function.
+
+### ViewHelpers (news and other records)
+
+Namespace `ai` is registered globally (`http://typo3.org/ns/FourViewture/AiLabeling/ViewHelpers`).
+
+```html
+<ai:label record="{newsItem}" />                       <!-- Extbase model -->
+<ai:label record="{data}" table="tx_foo" />            <!-- record array -->
+<ai:label table="tx_foo" uid="{uid}" />                <!-- uid, overlaid into the frontend language -->
+<ai:label record="{record}" />                         <!-- TYPO3 13.4+ Record object -->
+<ai:label record="{newsItem}" textVisible="0" />       <!-- icon only, text for screen readers -->
+
+<ai:condition.labeled record="{newsItem}">
+    <f:then>…</f:then>
+    <f:else>…</f:else>
+</ai:condition.labeled>
+```
+
+Models do not know the AI fields; they are loaded by uid (`_localizedUid` for translations), cached
+per request.
+
+**EXT:news, list view** – `Resources/Private/Partials/List/Item.html` (copy into your site package):
+
+```html
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:ai="http://typo3.org/ns/FourViewture/AiLabeling/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+…
+<div class="header">
+    <h3>
+        <n:link newsItem="{newsItem}" settings="{settings}" title="{newsItem.title}">
+            <span itemprop="headline">{newsItem.title}</span>
+        </n:link>
+    </h3>
+    <ai:label record="{newsItem}" />
+</div>
+```
+
+**EXT:news, detail view** – `Resources/Private/Templates/News/Detail.html`, after the headline:
+
+```html
+<div class="header">
+    <h1 itemprop="headline">{newsItem.title}</h1>
+    <ai:label record="{newsItem}" />
+</div>
+```
+
+Keep the label outside of links and headings (accessible names stay clean). Images of the news item
+are labelled automatically (burned-in symbol, alt text, figcaption).
+
+**Generic record (FLUIDTEMPLATE / PAGEVIEW)** – DataProcessor alias `ai-label`:
+
+```typoscript
+lib.myRecord = FLUIDTEMPLATE
+lib.myRecord {
+    dataProcessing.10 = ai-label
+    # optional: table = tx_foo (default: current table), as = aiLabel
+}
+```
+
+```html
+<f:if condition="{aiLabel.active}">{aiLabel.html -> f:format.raw()}</f:if>
+<!-- also available: {aiLabel.type} (generated|modified), {aiLabel.text} -->
+```
+
 ## Architecture
 
 ```
@@ -96,7 +218,10 @@ Classes/
   Detection/AiContentDetector.php    TYPO3-independent metadata analysis
   Service/LabelEvaluator.php         decision logic of the guide (mirrored in label-guide.js)
   Service/AutoLabeler.php            detector -> FAL metadata
-  Service/LabelTextResolver.php      label text / defaults (for the upcoming frontend part)
+  Service/LabelTextResolver.php      label text / defaults (backend: $GLOBALS['LANG'], frontend: site language)
+  Frontend/                          LabelRenderer (component), ContentElementLabeler, RecordLabelResolver, settings
+  Html/                              targeted string insertion helpers (no DOM round trip)
+  ViewHelpers/, DataProcessing/      <ai:label>, <ai:condition.labeled>, dataProcessing ai-label
   EventListener/                     TCA/SQL for all tables, detection, icon overlays, list module select
   Service/RecordOverlay.php          overlay decision for record icons
   Hooks/DataHandlerHook.php          persist computed status on save
@@ -118,7 +243,6 @@ file types as integers instead of `AbstractFile::FILETYPE_*`.
   files without preview; the core offers no event for tiles (12–14).
 - Record overlay only when the core shows no status overlay (hidden etc. win) and only where the
   rendered row contains the AI fields (not in the page tree).
-- Frontend output is not part of this version.
 
 ## Tests
 

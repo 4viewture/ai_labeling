@@ -19,3 +19,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 // see Configuration/Services.yaml – the hook is simply not called anymore in 13+)
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Core\Imaging\IconFactory::class]['overrideIconOverlay']['ai_labeling']
     = \FourViewture\AiLabeling\Hooks\IconOverlayHook::class;
+
+// Global Fluid namespace "ai" (http://typo3.org/ns/FourViewture/AiLabeling/ViewHelpers also works as xmlns)
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['ai'] ??= [];
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['ai'][] = 'FourViewture\\AiLabeling\\ViewHelpers';

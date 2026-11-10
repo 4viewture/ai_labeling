@@ -31,7 +31,7 @@ final class LabelRenderer
      */
     private const SYMBOL_VIEWBOX = '89.28 100.72 365.5 365.5';
 
-    private const MODIFIERS = ['overlay', 'media', 'content', 'caption', 'inline'];
+    private const MODIFIERS = ['overlay', 'media', 'content', 'caption'];
 
     private static ?string $symbolPath = null;
 
