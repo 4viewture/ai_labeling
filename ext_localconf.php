@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+defined('TYPO3') or die();
+
+// FormEngine node rendering the editor guide incl. live assessment on top of the "AI" tab
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1762790401] = [
+    'nodeName' => 'aiLabelingGuide',
+    'priority' => 40,
+    'class' => \FourViewture\AiLabeling\Form\Element\GuideInformation::class,
+];
+
+// Recalculate status / active flag whenever records are saved through DataHandler
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['ai_labeling']
+    = \FourViewture\AiLabeling\Hooks\DataHandlerHook::class;
+
+// TYPO3 12 only: AI overlay on record icons (replaced by ModifyRecordOverlayIconIdentifierEvent in 13+,
+// see Configuration/Services.yaml – the hook is simply not called anymore in 13+)
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Core\Imaging\IconFactory::class]['overrideIconOverlay']['ai_labeling']
+    = \FourViewture\AiLabeling\Hooks\IconOverlayHook::class;

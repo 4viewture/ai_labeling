@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:ai_labeling/Resources/Private/Language/locallang_guide.xlf" product-name="ai_labeling">
+		<header/>
+		<body>
+			<trans-unit id="status.title" resname="status.title">
+				<source>Assessment</source>
+			</trans-unit>
+			<trans-unit id="status.0" resname="status.0">
+				<source>No label needed</source>
+			</trans-unit>
+			<trans-unit id="status.1" resname="status.1">
+				<source>Label optional</source>
+			</trans-unit>
+			<trans-unit id="status.2" resname="status.2">
+				<source>Label recommended (in case of doubt)</source>
+			</trans-unit>
+			<trans-unit id="status.3" resname="status.3">
+				<source>Label required</source>
+			</trans-unit>
+			<trans-unit id="reason.none" resname="reason.none">
+				<source>No AI was used.</source>
+			</trans-unit>
+			<trans-unit id="reason.assisted" resname="reason.assisted">
+				<source>Only technical adjustments – no labelling obligation.</source>
+			</trans-unit>
+			<trans-unit id="reason.deepfake" resname="reason.deepfake">
+				<source>Deepfake: reference to real or plausible persons, places or events AND potential to deceive.</source>
+			</trans-unit>
+			<trans-unit id="reason.syntheticPerson" resname="reason.syntheticPerson">
+				<source>AI person appears as a real person (e.g. testimonial) – counts as a deepfake.</source>
+			</trans-unit>
+			<trans-unit id="reason.productAltered" resname="reason.productAltered">
+				<source>AI changes the product or its use.</source>
+			</trans-unit>
+			<trans-unit id="reason.publicInterestText" resname="reason.publicInterestText">
+				<source>Text on a matter of public interest without substantive human review.</source>
+			</trans-unit>
+			<trans-unit id="reason.doubt" resname="reason.doubt">
+				<source>Only one deepfake criterion applies (e.g. realistic but fictitious landscape) – the guide recommends labelling in case of doubt.</source>
+			</trans-unit>
+			<trans-unit id="reason.reviewedText" resname="reason.reviewedText">
+				<source>Reviewed under editorial responsibility – no obligation. Voluntary labelling can still make sense (e.g. legal or health advice, press releases, columns).</source>
+			</trans-unit>
+			<trans-unit id="reason.noCriteria" resname="reason.noCriteria">
+				<source>None of the criteria applies. Labelling is voluntary.</source>
+			</trans-unit>
+			<trans-unit id="reason.forced" resname="reason.forced">
+				<source>Labelling is always applied (manual setting).</source>
+			</trans-unit>
+			<trans-unit id="reason.suppressed" resname="reason.suppressed">
+				<source>Labelling was switched off manually.</source>
+			</trans-unit>
+			<trans-unit id="reason.suppressedRequired" resname="reason.suppressedRequired">
+				<source>Attention: labelling was switched off although it is required. Please document the reason in the notes.</source>
+			</trans-unit>
+			<trans-unit id="active.0" resname="active.0">
+				<source>This item will not be labelled.</source>
+			</trans-unit>
+			<trans-unit id="active.1" resname="active.1">
+				<source>This item will be labelled.</source>
+			</trans-unit>
+			<trans-unit id="suggestion" resname="suggestion">
+				<source>Label</source>
+			</trans-unit>
+			<trans-unit id="labeltype.generated" resname="labeltype.generated">
+				<source>AI GENERATED</source>
+			</trans-unit>
+			<trans-unit id="labeltype.modified" resname="labeltype.modified">
+				<source>AI MODIFIED</source>
+			</trans-unit>
+			<trans-unit id="default.text.generated" resname="default.text.generated">
+				<source>This text was created with the help of AI.</source>
+			</trans-unit>
+			<trans-unit id="default.text.modified" resname="default.text.modified">
+				<source>This text was edited with the help of AI.</source>
+			</trans-unit>
+			<trans-unit id="default.visual.generated" resname="default.visual.generated">
+				<source>AI-generated</source>
+			</trans-unit>
+			<trans-unit id="default.visual.modified" resname="default.visual.modified">
+				<source>Modified with AI</source>
+			</trans-unit>
+			<trans-unit id="default.audio.generated" resname="default.audio.generated">
+				<source>This recording contains AI-generated content.</source>
+			</trans-unit>
+			<trans-unit id="default.audio.modified" resname="default.audio.modified">
+				<source>This recording contains AI-generated content.</source>
+			</trans-unit>
+			<trans-unit id="detected.title" resname="detected.title">
+				<source>Detected automatically</source>
+			</trans-unit>
+			<trans-unit id="detected.text" resname="detected.text">
+				<source>The file metadata indicates AI generation or modification. The file was labelled automatically – please check the questions below and adjust if necessary.</source>
+			</trans-unit>
+			<trans-unit id="guide.open" resname="guide.open">
+				<source>Show guide: labelling AI content (Art. 50 EU AI Act)</source>
+			</trans-unit>
+			<trans-unit id="guide.intro" resname="guide.intro">
+				<source>The transparency obligations of Art. 50 EU AI Act apply from 2 August 2026. Infringements may result in fines.</source>
+			</trans-unit>
+			<trans-unit id="guide.disclaimer" resname="guide.disclaimer">
+				<source>Orientation aid based on the guide by Mittelstand-Digital Zentrum Berlin – not legally binding information and no legal advice. Artistic and satirical exceptions are not covered.</source>
+			</trans-unit>
+			<trans-unit id="guide.source" resname="guide.source">
+				<source>Source:</source>
+			</trans-unit>
+			<trans-unit id="section.decision.title" resname="section.decision.title">
+				<source>Decision aid</source>
+			</trans-unit>
+			<trans-unit id="decision.1" resname="decision.1">
+				<source>What is it: text, image, audio, video or a chatbot?</source>
+			</trans-unit>
+			<trans-unit id="decision.2" resname="decision.2">
+				<source>Images, audio, video: are BOTH deepfake criteria met – reference to real or plausible persons, places or events AND potential to deceive?</source>
+			</trans-unit>
+			<trans-unit id="decision.3" resname="decision.3">
+				<source>Texts: is it about a matter of public interest, and is there no substantive human review?</source>
+			</trans-unit>
+			<trans-unit id="decision.4" resname="decision.4">
+				<source>Product images: does the AI change the product itself or its use?</source>
+			</trans-unit>
+			<trans-unit id="decision.5" resname="decision.5">
+				<source>If yes: label visibly. In case of doubt, label voluntarily.</source>
+			</trans-unit>
+			<trans-unit id="section.types.title" resname="section.types.title">
+				<source>Obligations by content type</source>
+			</trans-unit>
+			<trans-unit id="types.text" resname="types.text">
+				<source>Texts: label if published without review and intended to inform the public on matters of public interest (public safety, health, environment, consumer protection, crisis communication, political and economic questions). Purely promotional texts usually not, unless they look like independent reporting.</source>
+			</trans-unit>
+			<trans-unit id="types.image" resname="types.image">
+				<source>Images: there is no general obligation for AI images – deepfakes must be labelled. Realistic fictitious landscapes are disputed; label in case of doubt.</source>
+			</trans-unit>
+			<trans-unit id="types.product" resname="types.product">
+				<source>Product images: label if the AI changes colour, material, size, accessories or the usage situation. Colour correction, background, scaling, sharpening and compression are unproblematic.</source>
+			</trans-unit>
+			<trans-unit id="types.testimonial" resname="types.testimonial">
+				<source>AI testimonials: an AI person appearing as a real customer is a deepfake and must be labelled – plus a risk under competition law.</source>
+			</trans-unit>
+			<trans-unit id="types.av" resname="types.av">
+				<source>Audio and video: deepfakes must be labelled, e.g. voice clones in marketing videos or podcasts.</source>
+			</trans-unit>
+			<trans-unit id="types.chatbot" resname="types.chatbot">
+				<source>Chatbots: users must be able to recognise that they are interacting with an AI system.</source>
+			</trans-unit>
+			<trans-unit id="section.exceptions.title" resname="section.exceptions.title">
+				<source>Exceptions</source>
+			</trans-unit>
+			<trans-unit id="exceptions.review" resname="exceptions.review">
+				<source>Human review: texts are exempt if a person or organisation has reviewed them in substance and bears editorial responsibility. Cursory proofreading is not enough.</source>
+			</trans-unit>
+			<trans-unit id="exceptions.noDeepfake" resname="exceptions.noDeepfake">
+				<source>No deepfake criteria: fantasy, comic or clearly stylised motifs, icons, infographics and abstract graphics are typically not subject to labelling.</source>
+			</trans-unit>
+			<trans-unit id="exceptions.technical" resname="exceptions.technical">
+				<source>Technical adjustments (colour correction, background, scaling, sharpening, compression) are not subject to labelling.</source>
+			</trans-unit>
+			<trans-unit id="exceptions.voluntary" resname="exceptions.voluntary">
+				<source>Voluntary labelling can make sense, e.g. for advice with a legal or health reference, press releases or personal-looking texts such as columns.</source>
+			</trans-unit>
+			<trans-unit id="section.placement.title" resname="section.placement.title">
+				<source>How to label</source>
+			</trans-unit>
+			<trans-unit id="placement.basic" resname="placement.basic">
+				<source>The label must be clearly recognisable and visible at the latest at first contact – permanently for videos.</source>
+			</trans-unit>
+			<trans-unit id="placement.image" resname="placement.image">
+				<source>Image: firmly embedded, e.g. at the edge or in a corner.</source>
+			</trans-unit>
+			<trans-unit id="placement.shortVideo" resname="placement.shortVideo">
+				<source>Short video: visible throughout.</source>
+			</trans-unit>
+			<trans-unit id="placement.longVideo" resname="placement.longVideo">
+				<source>Longer video: at the beginning, repeatedly and after every cut.</source>
+			</trans-unit>
+			<trans-unit id="placement.live" resname="placement.live">
+				<source>Live stream: during the entire broadcast.</source>
+			</trans-unit>
+			<trans-unit id="placement.audio" resname="placement.audio">
+				<source>Audio: spoken notice at the beginning, additionally visual in players.</source>
+			</trans-unit>
+			<trans-unit id="placement.text" resname="placement.text">
+				<source>Text: placed consistently, e.g. above the text or at the headline.</source>
+			</trans-unit>
+			<trans-unit id="placement.icons" resname="placement.icons">
+				<source>Since June 2026 the EU Commission provides free icons "AI GENERATED", "AI MODIFIED" and a basic "AI" icon (use is voluntary). Own labels are permitted if firmly embedded in the file or shown as a clearly visible watermark.</source>
+			</trans-unit>
+			<trans-unit id="section.examples.title" resname="section.examples.title">
+				<source>Example texts</source>
+			</trans-unit>
+			<trans-unit id="examples.text" resname="examples.text">
+				<source>Text: "This text/article was created with the help of AI."</source>
+			</trans-unit>
+			<trans-unit id="examples.audio" resname="examples.audio">
+				<source>Audio: "This recording contains AI-generated content."</source>
+			</trans-unit>
+			<trans-unit id="examples.visual" resname="examples.visual">
+				<source>Image/video: EU icon "AI GENERATED" or "AI MODIFIED", or "AI-generated".</source>
+			</trans-unit>
+			<trans-unit id="section.responsibility.title" resname="section.responsibility.title">
+				<source>Who is responsible?</source>
+			</trans-unit>
+			<trans-unit id="responsibility.provider" resname="responsibility.provider">
+				<source>Technical marking (watermarks, metadata such as C2PA/IPTC) is the task of the AI provider. This extension reads such metadata on upload and labels automatically.</source>
+			</trans-unit>
+			<trans-unit id="responsibility.company" resname="responsibility.company">
+				<source>The visible label in the published content is the responsibility of the publishing organisation – i.e. yours.</source>
+			</trans-unit>
+			<trans-unit id="section.copyright.title" resname="section.copyright.title">
+				<source>Note on copyright</source>
+			</trans-unit>
+			<trans-unit id="copyright.text" resname="copyright.text">
+				<source>AI-generated texts and images are usually not protected by copyright. Protection can arise if a human edits the result substantially. A purely AI-generated logo can still be registered as a trademark.</source>
+			</trans-unit>
+			<trans-unit id="flash.suppressedRequired.title" resname="flash.suppressedRequired.title">
+				<source>Label switched off although required</source>
+			</trans-unit>
+			<trans-unit id="flash.suppressedRequired.body" resname="flash.suppressedRequired.body">
+				<source>According to the assessment this item must be labelled (Art. 50 EU AI Act). Please check the setting and document the reason in the internal notes.</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated" resname="filelist.badge.generated">
+				<source>AI generated</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated.title" resname="filelist.badge.generated.title">
+				<source>Generated with AI – will be labelled</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified" resname="filelist.badge.modified">
+				<source>AI modified</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified.title" resname="filelist.badge.modified.title">
+				<source>Modified with AI – will be labelled</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated.unlabeled" resname="filelist.badge.generated.unlabeled">
+				<source>AI generated, unlabelled</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated.unlabeled.title" resname="filelist.badge.generated.unlabeled.title">
+				<source>Generated with AI but currently not labelled – please check</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified.unlabeled" resname="filelist.badge.modified.unlabeled">
+				<source>AI modified, unlabelled</source>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified.unlabeled.title" resname="filelist.badge.modified.unlabeled.title">
+				<source>Modified with AI but currently not labelled – please check</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

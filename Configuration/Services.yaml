@@ -1,0 +1,76 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  FourViewture\AiLabeling\:
+    resource: '../Classes/*'
+    # Value objects, the TYPO3-independent detector and FormEngine nodes / hooks
+    # (instantiated by the core via makeInstance) are no DI services.
+    exclude:
+      - '../Classes/Domain/*'
+      - '../Classes/Detection/*'
+      - '../Classes/Form/*'
+      - '../Classes/Hooks/*'
+
+  FourViewture\AiLabeling\EventListener\FileAiDetectionListener:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/file-added'
+        method: 'onFileAdded'
+        event: TYPO3\CMS\Core\Resource\Event\AfterFileAddedEvent
+      - name: event.listener
+        identifier: 'ai-labeling/file-replaced'
+        method: 'onFileReplaced'
+        event: TYPO3\CMS\Core\Resource\Event\AfterFileReplacedEvent
+
+  # Fields + "AI" tab for all eligible tables and types (TCA) and their database columns
+  FourViewture\AiLabeling\EventListener\AddAiLabelingToTables:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/add-ai-labeling-to-tables'
+        event: TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent
+
+  FourViewture\AiLabeling\EventListener\AddAiLabelingColumnsToDatabase:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/add-ai-labeling-columns'
+        event: TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent
+
+  # Record icon overlay. 13+: event (class missing in 12 -> never dispatched there),
+  # 12: hook IconOverlayHook registered in ext_localconf.php
+  FourViewture\AiLabeling\EventListener\AiRecordIconOverlay:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/record-icon-overlay'
+        event: TYPO3\CMS\Core\Imaging\Event\ModifyRecordOverlayIconIdentifierEvent
+
+  # List module selects only displayed columns -> add the fields needed for the overlay
+  FourViewture\AiLabeling\EventListener\SelectAiFieldsInRecordList:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/select-ai-fields-in-record-list'
+        event: TYPO3\CMS\Backend\View\Event\ModifyDatabaseQueryForRecordListingEvent
+
+  # TYPO3 12.4 – 14: overlay on file icons (file list, element browser, references, live search)
+  FourViewture\AiLabeling\EventListener\AiFileIconOverlay:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/file-icon-overlay'
+        event: TYPO3\CMS\Core\Imaging\Event\ModifyIconForResourcePropertiesEvent
+
+  # TYPO3 14+: badge in the name column of the file list. The event class does not exist in 12/13,
+  # the listener is never dispatched there (event given explicitly, so no reflection is needed).
+  FourViewture\AiLabeling\EventListener\AiFileListRowBadge:
+    tags:
+      - name: event.listener
+        identifier: 'ai-labeling/file-list-row-badge'
+        event: TYPO3\CMS\Filelist\Event\AfterFileListRowPreparedEvent
+
+  FourViewture\AiLabeling\Command\ScanCommand:
+    tags:
+      - name: console.command
+        command: 'ailabeling:scan'
+        description: 'Detect AI-generated files from metadata and label them (EU AI Act Art. 50)'
+        schedulable: true

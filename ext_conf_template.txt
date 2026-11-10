@@ -1,0 +1,17 @@
+# cat=tables; type=string; label=Tables: "*" = all eligible tables (excludes be_*, sys_* except sys_file_metadata, fe_users/fe_groups, adminOnly, readOnly and root-level tables) or comma-separated list of tables. sys_file_metadata is always included.
+tables = *
+
+# cat=tables; type=string; label=Exclude tables: Comma-separated list of tables that should not get the AI fields
+excludeTables =
+
+# cat=detection; type=boolean; label=Detect AI content on upload: Analyse uploaded/replaced files for AI metadata (IPTC DigitalSourceType, C2PA, EXIF, PNG text chunks)
+autoDetect = 1
+
+# cat=detection; type=boolean; label=Label detected files automatically: Set the label mode of detected files to "always label". If disabled, only the AI involvement and the evidence are stored.
+autoLabel = 1
+
+# cat=detection; type=int+; label=Scan limit (MB): Maximum number of megabytes read per file (head and tail of larger files are scanned)
+scanLimitMb = 32
+
+# cat=detection; type=string; label=Additional tool signatures: Comma-separated list of additional AI tool names that are searched in the metadata of a file
+additionalSignatures =

@@ -1,0 +1,53 @@
+.ai-labeling-guide {
+  display: block;
+  margin-top: .75rem;
+  max-width: 60rem;
+}
+
+.ai-labeling-guide .callout {
+  margin-bottom: .75rem;
+}
+
+.ai-labeling-guide__reasons {
+  margin: 0 0 .5rem;
+  padding-left: 1.25rem;
+}
+
+.ai-labeling-guide__suggestion {
+  margin: 0;
+}
+
+.ai-labeling-guide__evidence {
+  margin: .5rem 0 0;
+  white-space: pre-wrap;
+  font-size: .85em;
+}
+
+.ai-labeling-guide__details {
+  border: 1px solid var(--typo3-component-border-color, #d7d7d7);
+  border-radius: var(--typo3-component-border-radius, 4px);
+  padding: .5rem .75rem;
+}
+
+.ai-labeling-guide__details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.ai-labeling-guide__body {
+  padding-top: .5rem;
+}
+
+.ai-labeling-guide__heading {
+  font-size: 1em;
+  margin: 1rem 0 .35rem;
+}
+
+.ai-labeling-guide__body ul,
+.ai-labeling-guide__body ol {
+  padding-left: 1.25rem;
+}
+
+.ai-labeling-guide__body li {
+  margin-bottom: .25rem;
+}

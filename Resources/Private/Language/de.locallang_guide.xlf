@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:ai_labeling/Resources/Private/Language/locallang_guide.xlf" product-name="ai_labeling">
+		<header/>
+		<body>
+			<trans-unit id="status.title" resname="status.title">
+				<source>Assessment</source>
+				<target state="translated">Einschätzung</target>
+			</trans-unit>
+			<trans-unit id="status.0" resname="status.0">
+				<source>No label needed</source>
+				<target state="translated">Keine Kennzeichnung nötig</target>
+			</trans-unit>
+			<trans-unit id="status.1" resname="status.1">
+				<source>Label optional</source>
+				<target state="translated">Kennzeichnung freiwillig</target>
+			</trans-unit>
+			<trans-unit id="status.2" resname="status.2">
+				<source>Label recommended (in case of doubt)</source>
+				<target state="translated">Kennzeichnung empfohlen (im Zweifel)</target>
+			</trans-unit>
+			<trans-unit id="status.3" resname="status.3">
+				<source>Label required</source>
+				<target state="translated">Kennzeichnung erforderlich</target>
+			</trans-unit>
+			<trans-unit id="reason.none" resname="reason.none">
+				<source>No AI was used.</source>
+				<target state="translated">Es wurde keine KI eingesetzt.</target>
+			</trans-unit>
+			<trans-unit id="reason.assisted" resname="reason.assisted">
+				<source>Only technical adjustments – no labelling obligation.</source>
+				<target state="translated">Nur technische Anpassungen – keine Kennzeichnungspflicht.</target>
+			</trans-unit>
+			<trans-unit id="reason.deepfake" resname="reason.deepfake">
+				<source>Deepfake: reference to real or plausible persons, places or events AND potential to deceive.</source>
+				<target state="translated">Deepfake: Bezug zu realen oder plausiblen Personen, Orten oder Ereignissen UND Täuschungspotenzial.</target>
+			</trans-unit>
+			<trans-unit id="reason.syntheticPerson" resname="reason.syntheticPerson">
+				<source>AI person appears as a real person (e.g. testimonial) – counts as a deepfake.</source>
+				<target state="translated">KI-Person tritt als echte Person auf (z. B. Testimonial) – gilt als Deepfake.</target>
+			</trans-unit>
+			<trans-unit id="reason.productAltered" resname="reason.productAltered">
+				<source>AI changes the product or its use.</source>
+				<target state="translated">Die KI verändert das Produkt oder seine Nutzung.</target>
+			</trans-unit>
+			<trans-unit id="reason.publicInterestText" resname="reason.publicInterestText">
+				<source>Text on a matter of public interest without substantive human review.</source>
+				<target state="translated">Text zu einem Thema von öffentlichem Interesse ohne inhaltliche menschliche Prüfung.</target>
+			</trans-unit>
+			<trans-unit id="reason.doubt" resname="reason.doubt">
+				<source>Only one deepfake criterion applies (e.g. realistic but fictitious landscape) – the guide recommends labelling in case of doubt.</source>
+				<target state="translated">Nur ein Deepfake-Kriterium trifft zu (z. B. realistisch wirkende, fiktive Landschaft) – der Leitfaden rät im Zweifel zur Kennzeichnung.</target>
+			</trans-unit>
+			<trans-unit id="reason.reviewedText" resname="reason.reviewedText">
+				<source>Reviewed under editorial responsibility – no obligation. Voluntary labelling can still make sense (e.g. legal or health advice, press releases, columns).</source>
+				<target state="translated">Redaktionell geprüft – keine Pflicht. Freiwillige Kennzeichnung kann trotzdem sinnvoll sein (z. B. Ratgeber mit Rechts- oder Gesundheitsbezug, Pressemitteilungen, Kolumnen).</target>
+			</trans-unit>
+			<trans-unit id="reason.noCriteria" resname="reason.noCriteria">
+				<source>None of the criteria applies. Labelling is voluntary.</source>
+				<target state="translated">Keines der Kriterien trifft zu. Eine Kennzeichnung ist freiwillig.</target>
+			</trans-unit>
+			<trans-unit id="reason.forced" resname="reason.forced">
+				<source>Labelling is always applied (manual setting).</source>
+				<target state="translated">Es wird immer gekennzeichnet (manuelle Einstellung).</target>
+			</trans-unit>
+			<trans-unit id="reason.suppressed" resname="reason.suppressed">
+				<source>Labelling was switched off manually.</source>
+				<target state="translated">Die Kennzeichnung wurde manuell abgeschaltet.</target>
+			</trans-unit>
+			<trans-unit id="reason.suppressedRequired" resname="reason.suppressedRequired">
+				<source>Attention: labelling was switched off although it is required. Please document the reason in the notes.</source>
+				<target state="translated">Achtung: Die Kennzeichnung wurde abgeschaltet, obwohl sie erforderlich ist. Bitte Begründung in den Notizen festhalten.</target>
+			</trans-unit>
+			<trans-unit id="active.0" resname="active.0">
+				<source>This item will not be labelled.</source>
+				<target state="translated">Dieses Element wird nicht gekennzeichnet.</target>
+			</trans-unit>
+			<trans-unit id="active.1" resname="active.1">
+				<source>This item will be labelled.</source>
+				<target state="translated">Dieses Element wird gekennzeichnet.</target>
+			</trans-unit>
+			<trans-unit id="suggestion" resname="suggestion">
+				<source>Label</source>
+				<target state="translated">Kennzeichnung</target>
+			</trans-unit>
+			<trans-unit id="labeltype.generated" resname="labeltype.generated">
+				<source>AI GENERATED</source>
+				<target state="translated">AI GENERATED</target>
+			</trans-unit>
+			<trans-unit id="labeltype.modified" resname="labeltype.modified">
+				<source>AI MODIFIED</source>
+				<target state="translated">AI MODIFIED</target>
+			</trans-unit>
+			<trans-unit id="default.text.generated" resname="default.text.generated">
+				<source>This text was created with the help of AI.</source>
+				<target state="translated">Dieser Text wurde mit Hilfe von KI erzeugt.</target>
+			</trans-unit>
+			<trans-unit id="default.text.modified" resname="default.text.modified">
+				<source>This text was edited with the help of AI.</source>
+				<target state="translated">Dieser Text wurde mit Hilfe von KI bearbeitet.</target>
+			</trans-unit>
+			<trans-unit id="default.visual.generated" resname="default.visual.generated">
+				<source>AI-generated</source>
+				<target state="translated">KI-generiert</target>
+			</trans-unit>
+			<trans-unit id="default.visual.modified" resname="default.visual.modified">
+				<source>Modified with AI</source>
+				<target state="translated">Mit KI verändert</target>
+			</trans-unit>
+			<trans-unit id="default.audio.generated" resname="default.audio.generated">
+				<source>This recording contains AI-generated content.</source>
+				<target state="translated">Diese Aufnahme enthält KI-generierte Inhalte.</target>
+			</trans-unit>
+			<trans-unit id="default.audio.modified" resname="default.audio.modified">
+				<source>This recording contains AI-generated content.</source>
+				<target state="translated">Diese Aufnahme enthält KI-generierte Inhalte.</target>
+			</trans-unit>
+			<trans-unit id="detected.title" resname="detected.title">
+				<source>Detected automatically</source>
+				<target state="translated">Automatisch erkannt</target>
+			</trans-unit>
+			<trans-unit id="detected.text" resname="detected.text">
+				<source>The file metadata indicates AI generation or modification. The file was labelled automatically – please check the questions below and adjust if necessary.</source>
+				<target state="translated">Die Metadaten der Datei weisen auf KI-Erzeugung oder -Bearbeitung hin. Die Datei wurde automatisch gekennzeichnet – bitte die Fragen unten prüfen und ggf. anpassen.</target>
+			</trans-unit>
+			<trans-unit id="guide.open" resname="guide.open">
+				<source>Show guide: labelling AI content (Art. 50 EU AI Act)</source>
+				<target state="translated">Leitfaden anzeigen: KI-Inhalte kennzeichnen (Art. 50 KI-Verordnung)</target>
+			</trans-unit>
+			<trans-unit id="guide.intro" resname="guide.intro">
+				<source>The transparency obligations of Art. 50 EU AI Act apply from 2 August 2026. Infringements may result in fines.</source>
+				<target state="translated">Die Transparenzpflichten nach Art. 50 der KI-Verordnung (EU AI Act) gelten ab dem 2. August 2026. Verstöße können Bußgelder nach sich ziehen.</target>
+			</trans-unit>
+			<trans-unit id="guide.disclaimer" resname="guide.disclaimer">
+				<source>Orientation aid based on the guide by Mittelstand-Digital Zentrum Berlin – not legally binding information and no legal advice. Artistic and satirical exceptions are not covered.</source>
+				<target state="translated">Orientierungshilfe auf Basis des Leitfadens des Mittelstand-Digital Zentrums Berlin – keine rechtsverbindliche Auskunft und keine Rechtsberatung. Künstlerische und satirische Ausnahmen werden nicht behandelt.</target>
+			</trans-unit>
+			<trans-unit id="guide.source" resname="guide.source">
+				<source>Source:</source>
+				<target state="translated">Quelle:</target>
+			</trans-unit>
+			<trans-unit id="section.decision.title" resname="section.decision.title">
+				<source>Decision aid</source>
+				<target state="translated">Entscheidungshilfe</target>
+			</trans-unit>
+			<trans-unit id="decision.1" resname="decision.1">
+				<source>What is it: text, image, audio, video or a chatbot?</source>
+				<target state="translated">Worum handelt es sich: Text, Bild, Audio, Video oder Chatbot?</target>
+			</trans-unit>
+			<trans-unit id="decision.2" resname="decision.2">
+				<source>Images, audio, video: are BOTH deepfake criteria met – reference to real or plausible persons, places or events AND potential to deceive?</source>
+				<target state="translated">Bild, Audio, Video: Sind BEIDE Deepfake-Kriterien erfüllt – Bezug zu realen oder plausiblen Personen, Orten oder Ereignissen UND Täuschungspotenzial?</target>
+			</trans-unit>
+			<trans-unit id="decision.3" resname="decision.3">
+				<source>Texts: is it about a matter of public interest, and is there no substantive human review?</source>
+				<target state="translated">Texte: Geht es um ein Thema von öffentlichem Interesse, und fehlt eine inhaltliche menschliche Prüfung?</target>
+			</trans-unit>
+			<trans-unit id="decision.4" resname="decision.4">
+				<source>Product images: does the AI change the product itself or its use?</source>
+				<target state="translated">Produktbilder: Verändert die KI das Produkt selbst oder seine Nutzung?</target>
+			</trans-unit>
+			<trans-unit id="decision.5" resname="decision.5">
+				<source>If yes: label visibly. In case of doubt, label voluntarily.</source>
+				<target state="translated">Falls ja: sichtbar kennzeichnen – im Zweifel auch freiwillig.</target>
+			</trans-unit>
+			<trans-unit id="section.types.title" resname="section.types.title">
+				<source>Obligations by content type</source>
+				<target state="translated">Pflichten nach Inhaltsart</target>
+			</trans-unit>
+			<trans-unit id="types.text" resname="types.text">
+				<source>Texts: label if published without review and intended to inform the public on matters of public interest (public safety, health, environment, consumer protection, crisis communication, political and economic questions). Purely promotional texts usually not, unless they look like independent reporting.</source>
+				<target state="translated">Texte: Kennzeichnung nötig, wenn ein KI-Text ungeprüft veröffentlicht wird und die Öffentlichkeit über Themen von öffentlichem Interesse informieren soll (öffentliche Sicherheit, Gesundheit, Umwelt, Verbraucherschutz, Krisenkommunikation, politische und wirtschaftliche Fragen). Rein werbliche Texte in der Regel nicht – außer sie wirken wie unabhängige Berichterstattung.</target>
+			</trans-unit>
+			<trans-unit id="types.image" resname="types.image">
+				<source>Images: there is no general obligation for AI images – deepfakes must be labelled. Realistic fictitious landscapes are disputed; label in case of doubt.</source>
+				<target state="translated">Bilder: Keine allgemeine Pflicht für KI-Bilder – Deepfakes müssen gekennzeichnet werden. Fiktive, realistisch wirkende Landschaften sind umstritten; im Zweifel kennzeichnen.</target>
+			</trans-unit>
+			<trans-unit id="types.product" resname="types.product">
+				<source>Product images: label if the AI changes colour, material, size, accessories or the usage situation. Colour correction, background, scaling, sharpening and compression are unproblematic.</source>
+				<target state="translated">Produktbilder: Kennzeichnen, wenn die KI Farbe, Material, Größe, Zubehör oder Nutzungssituation verändert. Farbkorrektur, Hintergrund, Skalierung, Schärfung und Komprimierung sind unproblematisch.</target>
+			</trans-unit>
+			<trans-unit id="types.testimonial" resname="types.testimonial">
+				<source>AI testimonials: an AI person appearing as a real customer is a deepfake and must be labelled – plus a risk under competition law.</source>
+				<target state="translated">KI-Testimonials: Eine KI-Person, die als echter Kunde auftritt, ist ein Deepfake und zu kennzeichnen – zusätzlich wettbewerbsrechtliches Risiko.</target>
+			</trans-unit>
+			<trans-unit id="types.av" resname="types.av">
+				<source>Audio and video: deepfakes must be labelled, e.g. voice clones in marketing videos or podcasts.</source>
+				<target state="translated">Audio und Video: Deepfakes müssen gekennzeichnet werden, z. B. Voice-Clones in Marketingvideos oder Podcasts.</target>
+			</trans-unit>
+			<trans-unit id="types.chatbot" resname="types.chatbot">
+				<source>Chatbots: users must be able to recognise that they are interacting with an AI system.</source>
+				<target state="translated">Chatbots: Nutzer müssen erkennen können, dass sie mit einem KI-System interagieren.</target>
+			</trans-unit>
+			<trans-unit id="section.exceptions.title" resname="section.exceptions.title">
+				<source>Exceptions</source>
+				<target state="translated">Ausnahmen</target>
+			</trans-unit>
+			<trans-unit id="exceptions.review" resname="exceptions.review">
+				<source>Human review: texts are exempt if a person or organisation has reviewed them in substance and bears editorial responsibility. Cursory proofreading is not enough.</source>
+				<target state="translated">Menschliche Prüfung: Texte sind ausgenommen, wenn eine Person oder Organisation sie inhaltlich geprüft hat und die redaktionelle Verantwortung trägt. Flüchtiges Gegenlesen genügt nicht.</target>
+			</trans-unit>
+			<trans-unit id="exceptions.noDeepfake" resname="exceptions.noDeepfake">
+				<source>No deepfake criteria: fantasy, comic or clearly stylised motifs, icons, infographics and abstract graphics are typically not subject to labelling.</source>
+				<target state="translated">Keine Deepfake-Kriterien: Fantasie-, Comic- oder erkennbar stilisierte Motive, Icons, Infografiken und abstrakte Grafiken sind typischerweise nicht pflichtig.</target>
+			</trans-unit>
+			<trans-unit id="exceptions.technical" resname="exceptions.technical">
+				<source>Technical adjustments (colour correction, background, scaling, sharpening, compression) are not subject to labelling.</source>
+				<target state="translated">Technische Anpassungen (Farbkorrektur, Hintergrund, Skalierung, Schärfung, Komprimierung) sind nicht kennzeichnungspflichtig.</target>
+			</trans-unit>
+			<trans-unit id="exceptions.voluntary" resname="exceptions.voluntary">
+				<source>Voluntary labelling can make sense, e.g. for advice with a legal or health reference, press releases or personal-looking texts such as columns.</source>
+				<target state="translated">Freiwillige Kennzeichnung kann sinnvoll sein, etwa bei Ratgebern mit Rechts- oder Gesundheitsbezug, Pressemitteilungen oder persönlich wirkenden Texten wie Kolumnen.</target>
+			</trans-unit>
+			<trans-unit id="section.placement.title" resname="section.placement.title">
+				<source>How to label</source>
+				<target state="translated">Wie kennzeichnen</target>
+			</trans-unit>
+			<trans-unit id="placement.basic" resname="placement.basic">
+				<source>The label must be clearly recognisable and visible at the latest at first contact – permanently for videos.</source>
+				<target state="translated">Die Kennzeichnung muss klar erkennbar und spätestens beim ersten Kontakt sichtbar sein, bei Videos dauerhaft.</target>
+			</trans-unit>
+			<trans-unit id="placement.image" resname="placement.image">
+				<source>Image: firmly embedded, e.g. at the edge or in a corner.</source>
+				<target state="translated">Bild: fest eingebettet, etwa am Rand oder in einer Ecke.</target>
+			</trans-unit>
+			<trans-unit id="placement.shortVideo" resname="placement.shortVideo">
+				<source>Short video: visible throughout.</source>
+				<target state="translated">Kurzes Video: durchgehend sichtbar.</target>
+			</trans-unit>
+			<trans-unit id="placement.longVideo" resname="placement.longVideo">
+				<source>Longer video: at the beginning, repeatedly and after every cut.</source>
+				<target state="translated">Längeres Video: zu Beginn, wiederholt und nach jedem Schnitt.</target>
+			</trans-unit>
+			<trans-unit id="placement.live" resname="placement.live">
+				<source>Live stream: during the entire broadcast.</source>
+				<target state="translated">Livestream: während der gesamten Übertragung.</target>
+			</trans-unit>
+			<trans-unit id="placement.audio" resname="placement.audio">
+				<source>Audio: spoken notice at the beginning, additionally visual in players.</source>
+				<target state="translated">Audio: gesprochener Hinweis zu Beginn, bei Playern zusätzlich visuell.</target>
+			</trans-unit>
+			<trans-unit id="placement.text" resname="placement.text">
+				<source>Text: placed consistently, e.g. above the text or at the headline.</source>
+				<target state="translated">Text: einheitlich platziert, etwa über dem Text oder an der Überschrift.</target>
+			</trans-unit>
+			<trans-unit id="placement.icons" resname="placement.icons">
+				<source>Since June 2026 the EU Commission provides free icons "AI GENERATED", "AI MODIFIED" and a basic "AI" icon (use is voluntary). Own labels are permitted if firmly embedded in the file or shown as a clearly visible watermark.</source>
+				<target state="translated">Seit Juni 2026 stellt die EU-Kommission kostenlose Icons „AI GENERATED“, „AI MODIFIED“ und ein Basis-Icon „AI“ bereit (Nutzung freiwillig). Eigene Kennzeichnungen sind zulässig, wenn sie fest in der Datei eingebettet sind oder als deutlich sichtbares Wasserzeichen erscheinen.</target>
+			</trans-unit>
+			<trans-unit id="section.examples.title" resname="section.examples.title">
+				<source>Example texts</source>
+				<target state="translated">Beispieltexte</target>
+			</trans-unit>
+			<trans-unit id="examples.text" resname="examples.text">
+				<source>Text: "This text/article was created with the help of AI."</source>
+				<target state="translated">Text: „Dieser Text/Beitrag wurde mit Hilfe von KI erzeugt.“</target>
+			</trans-unit>
+			<trans-unit id="examples.audio" resname="examples.audio">
+				<source>Audio: "This recording contains AI-generated content."</source>
+				<target state="translated">Audio: „Diese Aufnahme enthält KI-generierte Inhalte.“</target>
+			</trans-unit>
+			<trans-unit id="examples.visual" resname="examples.visual">
+				<source>Image/video: EU icon "AI GENERATED" or "AI MODIFIED", or "AI-generated".</source>
+				<target state="translated">Bild/Video: EU-Icon „AI GENERATED“ bzw. „AI MODIFIED“ oder „KI-generiert“.</target>
+			</trans-unit>
+			<trans-unit id="section.responsibility.title" resname="section.responsibility.title">
+				<source>Who is responsible?</source>
+				<target state="translated">Wer ist verantwortlich?</target>
+			</trans-unit>
+			<trans-unit id="responsibility.provider" resname="responsibility.provider">
+				<source>Technical marking (watermarks, metadata such as C2PA/IPTC) is the task of the AI provider. This extension reads such metadata on upload and labels automatically.</source>
+				<target state="translated">Die technische Kennzeichnung (Wasserzeichen, Metadaten wie C2PA/IPTC) ist Aufgabe des KI-Anbieters. Diese Erweiterung liest solche Metadaten beim Upload aus und kennzeichnet automatisch.</target>
+			</trans-unit>
+			<trans-unit id="responsibility.company" resname="responsibility.company">
+				<source>The visible label in the published content is the responsibility of the publishing organisation – i.e. yours.</source>
+				<target state="translated">Die sichtbare Kennzeichnung im veröffentlichten Inhalt liegt beim veröffentlichenden Unternehmen – also bei Ihnen.</target>
+			</trans-unit>
+			<trans-unit id="section.copyright.title" resname="section.copyright.title">
+				<source>Note on copyright</source>
+				<target state="translated">Hinweis zum Urheberrecht</target>
+			</trans-unit>
+			<trans-unit id="copyright.text" resname="copyright.text">
+				<source>AI-generated texts and images are usually not protected by copyright. Protection can arise if a human edits the result substantially. A purely AI-generated logo can still be registered as a trademark.</source>
+				<target state="translated">KI-generierte Texte und Bilder sind in der Regel nicht urheberrechtlich geschützt. Schutz kann entstehen, wenn ein Mensch das Ergebnis erheblich bearbeitet. Ein rein KI-generiertes Logo lässt sich aber als Marke anmelden.</target>
+			</trans-unit>
+			<trans-unit id="flash.suppressedRequired.title" resname="flash.suppressedRequired.title">
+				<source>Label switched off although required</source>
+				<target state="translated">Kennzeichnung abgeschaltet, obwohl erforderlich</target>
+			</trans-unit>
+			<trans-unit id="flash.suppressedRequired.body" resname="flash.suppressedRequired.body">
+				<source>According to the assessment this item must be labelled (Art. 50 EU AI Act). Please check the setting and document the reason in the internal notes.</source>
+				<target state="translated">Laut Einschätzung muss dieses Element gekennzeichnet werden (Art. 50 KI-Verordnung). Bitte Einstellung prüfen und die Begründung in den internen Notizen festhalten.</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated" resname="filelist.badge.generated">
+				<source>AI generated</source>
+				<target state="translated">KI-generiert</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated.title" resname="filelist.badge.generated.title">
+				<source>Generated with AI – will be labelled</source>
+				<target state="translated">Mit KI erzeugt – wird gekennzeichnet</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified" resname="filelist.badge.modified">
+				<source>AI modified</source>
+				<target state="translated">KI-verändert</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified.title" resname="filelist.badge.modified.title">
+				<source>Modified with AI – will be labelled</source>
+				<target state="translated">Mit KI verändert – wird gekennzeichnet</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated.unlabeled" resname="filelist.badge.generated.unlabeled">
+				<source>AI generated, unlabelled</source>
+				<target state="translated">KI-generiert, ohne Kennzeichnung</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.generated.unlabeled.title" resname="filelist.badge.generated.unlabeled.title">
+				<source>Generated with AI but currently not labelled – please check</source>
+				<target state="translated">Mit KI erzeugt, aber derzeit nicht gekennzeichnet – bitte prüfen</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified.unlabeled" resname="filelist.badge.modified.unlabeled">
+				<source>AI modified, unlabelled</source>
+				<target state="translated">KI-verändert, ohne Kennzeichnung</target>
+			</trans-unit>
+			<trans-unit id="filelist.badge.modified.unlabeled.title" resname="filelist.badge.modified.unlabeled.title">
+				<source>Modified with AI but currently not labelled – please check</source>
+				<target state="translated">Mit KI verändert, aber derzeit nicht gekennzeichnet – bitte prüfen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:ai_labeling/Resources/Private/Language/locallang_db.xlf" product-name="ai_labeling">
+		<header/>
+		<body>
+			<trans-unit id="tab" resname="tab">
+				<source>AI</source>
+				<target state="translated">KI</target>
+			</trans-unit>
+			<trans-unit id="palette.involvement" resname="palette.involvement">
+				<source>AI involvement</source>
+				<target state="translated">KI-Beteiligung</target>
+			</trans-unit>
+			<trans-unit id="palette.media" resname="palette.media">
+				<source>Deepfake check (images, audio, video)</source>
+				<target state="translated">Deepfake-Prüfung (Bild, Audio, Video)</target>
+			</trans-unit>
+			<trans-unit id="palette.text" resname="palette.text">
+				<source>Texts on matters of public interest</source>
+				<target state="translated">Texte zu Themen von öffentlichem Interesse</target>
+			</trans-unit>
+			<trans-unit id="palette.label" resname="palette.label">
+				<source>Labelling</source>
+				<target state="translated">Kennzeichnung</target>
+			</trans-unit>
+			<trans-unit id="palette.detection" resname="palette.detection">
+				<source>Automatic detection</source>
+				<target state="translated">Automatische Erkennung</target>
+			</trans-unit>
+			<trans-unit id="involvement" resname="involvement">
+				<source>Use of AI</source>
+				<target state="translated">Einsatz von KI</target>
+			</trans-unit>
+			<trans-unit id="involvement.description" resname="involvement.description">
+				<source>Technical adjustments such as colour correction, background, scaling, sharpening, compression or spell checking count as "AI-assisted" and do not require a label.</source>
+				<target state="translated">Technische Anpassungen wie Farbkorrektur, Hintergrundgestaltung, Skalierung, Schärfung, Komprimierung oder Rechtschreibprüfung gelten als „KI-unterstützt“ und sind nicht kennzeichnungspflichtig.</target>
+			</trans-unit>
+			<trans-unit id="involvement.0" resname="involvement.0">
+				<source>No AI</source>
+				<target state="translated">Keine KI</target>
+			</trans-unit>
+			<trans-unit id="involvement.1" resname="involvement.1">
+				<source>AI-assisted (technical adjustments only)</source>
+				<target state="translated">KI-unterstützt (nur technische Anpassungen)</target>
+			</trans-unit>
+			<trans-unit id="involvement.2" resname="involvement.2">
+				<source>Modified with AI (AI MODIFIED)</source>
+				<target state="translated">Mit KI verändert (AI MODIFIED)</target>
+			</trans-unit>
+			<trans-unit id="involvement.3" resname="involvement.3">
+				<source>Generated with AI (AI GENERATED)</source>
+				<target state="translated">Mit KI erzeugt (AI GENERATED)</target>
+			</trans-unit>
+			<trans-unit id="tool" resname="tool">
+				<source>AI tool / model</source>
+				<target state="translated">KI-Werkzeug / Modell</target>
+			</trans-unit>
+			<trans-unit id="tool.description" resname="tool.description">
+				<source>e.g. Midjourney v7, ChatGPT, Adobe Firefly – for traceability.</source>
+				<target state="translated">z. B. Midjourney v7, ChatGPT, Adobe Firefly – zur Nachvollziehbarkeit.</target>
+			</trans-unit>
+			<trans-unit id="real_reference" resname="real_reference">
+				<source>Refers to real or plausible persons, places or events</source>
+				<target state="translated">Bezug zu real existierenden oder plausiblen Personen, Orten oder Ereignissen</target>
+			</trans-unit>
+			<trans-unit id="real_reference.description" resname="real_reference.description">
+				<source>A well-known person is not necessary. Realistic-looking invented people or places also count.</source>
+				<target state="translated">Eine bekannte Person ist nicht nötig. Auch realistisch wirkende, erfundene Menschen oder Orte zählen.</target>
+			</trans-unit>
+			<trans-unit id="deceptive" resname="deceptive">
+				<source>Could be mistaken for authentic (potential to deceive)</source>
+				<target state="translated">Kann für echt gehalten werden (Täuschungspotenzial)</target>
+			</trans-unit>
+			<trans-unit id="deceptive.description" resname="deceptive.description">
+				<source>Fantasy, comic or clearly stylised motifs, icons, infographics and abstract graphics usually have no potential to deceive.</source>
+				<target state="translated">Fantasie-, Comic- oder erkennbar stilisierte Motive, Icons, Infografiken und abstrakte Grafiken haben in der Regel kein Täuschungspotenzial.</target>
+			</trans-unit>
+			<trans-unit id="synthetic_person" resname="synthetic_person">
+				<source>AI person appears as a real customer, employee or witness (testimonial)</source>
+				<target state="translated">KI-Person tritt als echte Kundin, echter Kunde oder Zeuge auf (Testimonial)</target>
+			</trans-unit>
+			<trans-unit id="synthetic_person.description" resname="synthetic_person.description">
+				<source>Counts as a deepfake and must be labelled. Additionally, there is a risk under competition law.</source>
+				<target state="translated">Gilt als Deepfake und muss gekennzeichnet werden. Zusätzlich besteht ein wettbewerbsrechtliches Risiko.</target>
+			</trans-unit>
+			<trans-unit id="product_altered" resname="product_altered">
+				<source>AI changes the product itself or its use</source>
+				<target state="translated">KI verändert das Produkt selbst oder seine Nutzung</target>
+			</trans-unit>
+			<trans-unit id="product_altered.description" resname="product_altered.description">
+				<source>e.g. colour, material, size, accessories or usage situation. Misleading depictions may also be problematic under competition law even when labelled.</source>
+				<target state="translated">z. B. Farbe, Material, Größe, Zubehör oder Nutzungssituation. Irreführende Darstellungen können auch mit Kennzeichnung wettbewerbsrechtlich problematisch sein.</target>
+			</trans-unit>
+			<trans-unit id="public_interest" resname="public_interest">
+				<source>Informs the public on matters of public interest</source>
+				<target state="translated">Informiert die Öffentlichkeit über Themen von öffentlichem Interesse</target>
+			</trans-unit>
+			<trans-unit id="public_interest.description" resname="public_interest.description">
+				<source>e.g. public safety, health, environment, consumer protection, crisis communication, general political or economic questions. Purely promotional or company-related texts usually not – unless they look like independent reporting.</source>
+				<target state="translated">z. B. öffentliche Sicherheit, Gesundheit, Umwelt, Verbraucherschutz, Krisenkommunikation, allgemeine politische und wirtschaftliche Fragen. Rein werbliche oder unternehmensbezogene Texte in der Regel nicht – es sei denn, sie wirken wie unabhängige Berichterstattung.</target>
+			</trans-unit>
+			<trans-unit id="human_review" resname="human_review">
+				<source>Reviewed in substance by a human who bears editorial responsibility</source>
+				<target state="translated">Inhaltlich von einem Menschen geprüft, redaktionelle Verantwortung übernommen</target>
+			</trans-unit>
+			<trans-unit id="human_review.description" resname="human_review.description">
+				<source>A cursory proofreading is not sufficient.</source>
+				<target state="translated">Ein flüchtiges Gegenlesen genügt nicht.</target>
+			</trans-unit>
+			<trans-unit id="reviewer" resname="reviewer">
+				<source>Editorially responsible</source>
+				<target state="translated">Redaktionell verantwortlich</target>
+			</trans-unit>
+			<trans-unit id="reviewer.description" resname="reviewer.description">
+				<source>Person or organisation that reviewed the content and bears editorial responsibility.</source>
+				<target state="translated">Person oder Organisation, die den Inhalt geprüft hat und die redaktionelle Verantwortung trägt.</target>
+			</trans-unit>
+			<trans-unit id="mode" resname="mode">
+				<source>Label</source>
+				<target state="translated">Kennzeichnung</target>
+			</trans-unit>
+			<trans-unit id="mode.description" resname="mode.description">
+				<source>"Automatic" follows the assessment above (labels if required or recommended). In case of doubt: label. Voluntary labelling is always possible.</source>
+				<target state="translated">„Automatisch“ folgt der Einschätzung oben (kennzeichnet, wenn erforderlich oder empfohlen). Im Zweifel kennzeichnen – freiwillig ist das jederzeit möglich.</target>
+			</trans-unit>
+			<trans-unit id="mode.0" resname="mode.0">
+				<source>Automatic (based on the assessment)</source>
+				<target state="translated">Automatisch (nach Einschätzung)</target>
+			</trans-unit>
+			<trans-unit id="mode.1" resname="mode.1">
+				<source>Always label</source>
+				<target state="translated">Immer kennzeichnen</target>
+			</trans-unit>
+			<trans-unit id="mode.2" resname="mode.2">
+				<source>Do not label</source>
+				<target state="translated">Nicht kennzeichnen</target>
+			</trans-unit>
+			<trans-unit id="label_text" resname="label_text">
+				<source>Label text</source>
+				<target state="translated">Kennzeichnungstext</target>
+			</trans-unit>
+			<trans-unit id="label_text.description" resname="label_text.description">
+				<source>Shown with the content in the frontend. Leave empty to use the default text.</source>
+				<target state="translated">Wird im Frontend mit dem Inhalt angezeigt. Leer lassen für den Standardtext.</target>
+			</trans-unit>
+			<trans-unit id="label_text.placeholder" resname="label_text.placeholder">
+				<source>Default text, e.g. "This text was created with the help of AI."</source>
+				<target state="translated">Standardtext, z. B. „Dieser Text wurde mit Hilfe von KI erzeugt.“</target>
+			</trans-unit>
+			<trans-unit id="notes" resname="notes">
+				<source>Internal notes</source>
+				<target state="translated">Interne Notizen</target>
+			</trans-unit>
+			<trans-unit id="detected" resname="detected">
+				<source>Detected automatically from file metadata</source>
+				<target state="translated">Automatisch aus Datei-Metadaten erkannt</target>
+			</trans-unit>
+			<trans-unit id="detection" resname="detection">
+				<source>Detection evidence</source>
+				<target state="translated">Erkennungsmerkmale</target>
+			</trans-unit>
+			<trans-unit id="status" resname="status">
+				<source>AI labelling status</source>
+				<target state="translated">KI-Kennzeichnung: Status</target>
+			</trans-unit>
+			<trans-unit id="active" resname="active">
+				<source>AI label active</source>
+				<target state="translated">KI-Kennzeichnung aktiv</target>
+			</trans-unit>
+			<trans-unit id="reasons" resname="reasons">
+				<source>Reasons (computed)</source>
+				<target state="translated">Begründung (berechnet)</target>
+			</trans-unit>
+			<trans-unit id="status.0" resname="status.0">
+				<source>No label needed</source>
+				<target state="translated">Keine Kennzeichnung nötig</target>
+			</trans-unit>
+			<trans-unit id="status.1" resname="status.1">
+				<source>Label optional</source>
+				<target state="translated">Kennzeichnung freiwillig</target>
+			</trans-unit>
+			<trans-unit id="status.2" resname="status.2">
+				<source>Label recommended</source>
+				<target state="translated">Kennzeichnung empfohlen</target>
+			</trans-unit>
+			<trans-unit id="status.3" resname="status.3">
+				<source>Label required</source>
+				<target state="translated">Kennzeichnung erforderlich</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
