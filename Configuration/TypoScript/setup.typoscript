@@ -27,3 +27,10 @@ page {
     includeJSFooter.aiLabeling.defer = 1
     includeJSFooter.aiLabeling.if.isTrue = {$plugin.tx_ailabeling.label.secondLayer}
 }
+
+# Label content elements. Note: overrides an existing tt_content.stdWrap.postUserFunc of the site
+# (stdWrap has only one postUserFunc) – disable via constant and call the labeler from your own userFunc.
+# Quoted comparison: TYPO3 13+ site settings write bool false as empty string.
+["{$plugin.tx_ailabeling.content.enable}" == "1"]
+    tt_content.stdWrap.postUserFunc = FourViewture\AiLabeling\Frontend\ContentElementLabeler->process
+[END]
