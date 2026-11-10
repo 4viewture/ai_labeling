@@ -14,6 +14,14 @@ services:
       - '../Classes/Form/*'
       - '../Classes/Hooks/*'
 
+  # Frontend services are also fetched via GeneralUtility::makeInstance() (static ViewHelper
+  # verdicts, userFuncs, FAL processors/renderers, which the core instantiates itself) -> public
+  FourViewture\AiLabeling\Frontend\:
+    resource: '../Classes/Frontend/*'
+    exclude:
+      - '../Classes/Frontend/LabelSettings.php'
+    public: true
+
   FourViewture\AiLabeling\EventListener\FileAiDetectionListener:
     tags:
       - name: event.listener

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf" product-name="ai_labeling">
+		<header/>
+		<body>
+			<trans-unit id="label" resname="label">
+				<source>AI Labeling (EU AI Act Art. 50)</source>
+			</trans-unit>
+			<trans-unit id="categories.ailabeling" resname="categories.ailabeling">
+				<source>AI labelling</source>
+			</trans-unit>
+			<trans-unit id="categories.ailabeling.label" resname="categories.ailabeling.label">
+				<source>Label</source>
+			</trans-unit>
+			<trans-unit id="categories.ailabeling.images" resname="categories.ailabeling.images">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="categories.ailabeling.media" resname="categories.ailabeling.media">
+				<source>Video and audio</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.css.include" resname="settings.plugin.tx_ailabeling.css.include">
+				<source>Include CSS</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.css.include" resname="settings.description.plugin.tx_ailabeling.css.include">
+				<source>Load ai-label.css. Disable only if the site provides own styles for .ai-label.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.content.enable" resname="settings.plugin.tx_ailabeling.content.enable">
+				<source>Label content elements</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.content.enable" resname="settings.description.plugin.tx_ailabeling.content.enable">
+				<source>Adds the label to labelled content elements via tt_content.stdWrap.postUserFunc.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.text" resname="settings.plugin.tx_ailabeling.label.text">
+				<source>Label text</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.label.text" resname="settings.description.plugin.tx_ailabeling.label.text">
+				<source>&quot;Hidden&quot; keeps the text for screen readers only; the icon stays visible.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.text.enum.visible" resname="settings.plugin.tx_ailabeling.label.text.enum.visible">
+				<source>Visible</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.text.enum.hidden" resname="settings.plugin.tx_ailabeling.label.text.enum.hidden">
+				<source>Hidden (screen readers only)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.secondLayer" resname="settings.plugin.tx_ailabeling.label.secondLayer">
+				<source>Second layer</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.label.secondLayer" resname="settings.description.plugin.tx_ailabeling.label.secondLayer">
+				<source>Adds a button with an explanation next to the label (Popover API).</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.burnIn" resname="settings.plugin.tx_ailabeling.images.burnIn">
+				<source>Burn symbol into images</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.images.burnIn" resname="settings.description.plugin.tx_ailabeling.images.burnIn">
+				<source>Composites the EU &quot;AI&quot; symbol onto processed frontend images. Clear processed files after changing image settings.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.position" resname="settings.plugin.tx_ailabeling.images.position">
+				<source>Symbol position</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.images.position" resname="settings.description.plugin.tx_ailabeling.images.position">
+				<source>Default top right (Code of Practice, Sub-measure 1.2.2 a).</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.position.enum.top-right" resname="settings.plugin.tx_ailabeling.images.position.enum.top-right">
+				<source>Top right</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.position.enum.top-left" resname="settings.plugin.tx_ailabeling.images.position.enum.top-left">
+				<source>Top left</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.position.enum.bottom-right" resname="settings.plugin.tx_ailabeling.images.position.enum.bottom-right">
+				<source>Bottom right</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.position.enum.bottom-left" resname="settings.plugin.tx_ailabeling.images.position.enum.bottom-left">
+				<source>Bottom left</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.sizePercent" resname="settings.plugin.tx_ailabeling.images.sizePercent">
+				<source>Symbol size (% of shorter edge)</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.images.sizePercent" resname="settings.description.plugin.tx_ailabeling.images.sizePercent">
+				<source>Limited by minimum and maximum size.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.minSize" resname="settings.plugin.tx_ailabeling.images.minSize">
+				<source>Minimum symbol size (px)</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.images.minSize" resname="settings.description.plugin.tx_ailabeling.images.minSize">
+				<source>Images smaller than about three times this size are not labelled by burn-in.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.maxSize" resname="settings.plugin.tx_ailabeling.images.maxSize">
+				<source>Maximum symbol size (px)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.altText" resname="settings.plugin.tx_ailabeling.images.altText">
+				<source>Extend alternative text and caption</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.images.altText" resname="settings.description.plugin.tx_ailabeling.images.altText">
+				<source>Appends the label text to non-empty alt attributes and adds the label to the figure caption.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.media.overlay" resname="settings.plugin.tx_ailabeling.media.overlay">
+				<source>Overlay on videos</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.media.overlay" resname="settings.description.plugin.tx_ailabeling.media.overlay">
+				<source>Shows the label at the top of the player (never over the controls). Off: label below the player.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

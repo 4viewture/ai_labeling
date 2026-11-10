@@ -1,0 +1,2 @@
+# Defaults for setups that read constants directly; site settings always win (Feature #103439).
+@import 'EXT:ai_labeling/Configuration/TypoScript/constants.typoscript'

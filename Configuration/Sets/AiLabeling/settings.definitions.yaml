@@ -1,0 +1,64 @@
+# Labels: labels.xlf (settings.<key>, settings.description.<key>).
+# enum as map (value: label): read as array in 13.4 and as object in 14.x – both supported.
+categories:
+  ailabeling: ~
+  ailabeling.label:
+    parent: ailabeling
+  ailabeling.images:
+    parent: ailabeling
+  ailabeling.media:
+    parent: ailabeling
+
+settings:
+  plugin.tx_ailabeling.css.include:
+    type: bool
+    default: true
+    category: ailabeling
+  plugin.tx_ailabeling.content.enable:
+    type: bool
+    default: true
+    category: ailabeling
+  plugin.tx_ailabeling.label.text:
+    type: string
+    default: visible
+    enum:
+      visible: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.label.text.enum.visible'
+      hidden: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.label.text.enum.hidden'
+    category: ailabeling.label
+  plugin.tx_ailabeling.label.secondLayer:
+    type: bool
+    default: false
+    category: ailabeling.label
+  plugin.tx_ailabeling.images.burnIn:
+    type: bool
+    default: true
+    category: ailabeling.images
+  plugin.tx_ailabeling.images.position:
+    type: string
+    default: top-right
+    enum:
+      top-right: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.images.position.enum.top-right'
+      top-left: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.images.position.enum.top-left'
+      bottom-right: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.images.position.enum.bottom-right'
+      bottom-left: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.images.position.enum.bottom-left'
+    category: ailabeling.images
+  plugin.tx_ailabeling.images.sizePercent:
+    type: number
+    default: 8
+    category: ailabeling.images
+  plugin.tx_ailabeling.images.minSize:
+    type: int
+    default: 24
+    category: ailabeling.images
+  plugin.tx_ailabeling.images.maxSize:
+    type: int
+    default: 96
+    category: ailabeling.images
+  plugin.tx_ailabeling.images.altText:
+    type: bool
+    default: true
+    category: ailabeling.images
+  plugin.tx_ailabeling.media.overlay:
+    type: bool
+    default: true
+    category: ailabeling.media

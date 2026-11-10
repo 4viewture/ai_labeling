@@ -1,0 +1,240 @@
+/*
+ * EXT:ai_labeling – frontend label (EU AI Act Art. 50)
+ *
+ * WCAG 2.2 AA:
+ * - real DOM text (no ::before/::after content, F87), em/rem units, wraps, no fixed heights
+ *   -> works at 200 % zoom, 320 px width (1.4.10) and with user text spacing (1.4.12)
+ * - opaque pill backing: text >= 4.5:1 (1.4.3), icon >= 3:1 (1.4.11) independent of the page background
+ * - forced-colors mode: system colours, icon uses currentColor
+ * - second-layer button: visible focus (2.4.7), target >= 24 x 24 px (2.5.8)
+ * - overlays never cover the player's control bar (top of the player, 2.4.11), pointer-events: none
+ *
+ * Theming: override the custom properties on any ancestor, e.g.
+ *   :root { --ai-label-color: #fff; --ai-label-background: #e60005; --ai-label-border-color: #e60005; }
+ * or add the class "ai-label-theme-red" to <html>/<body> or a section.
+ * Keep text/background contrast >= 4.5:1.
+ */
+
+:where(:root) {
+    --ai-label-color: #000;
+    --ai-label-background: #fff;
+    --ai-label-border-color: currentColor;
+    --ai-label-focus-color: currentColor;
+    --ai-label-font-size: 0.875em;
+    --ai-label-radius: 1em;
+    --ai-label-overlay-offset: 0.5em;
+}
+
+/* Red variant for 4Viewture / DRK themes: white on #e60005 = 4.8:1 */
+.ai-label-theme-red {
+    --ai-label-color: #fff;
+    --ai-label-background: #e60005;
+    --ai-label-border-color: #e60005;
+}
+
+.ai-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    box-sizing: border-box;
+    max-inline-size: 100%;
+    margin: 0;
+    padding: 0.15em 0.65em 0.15em 0.2em;
+    border: 1px solid var(--ai-label-border-color);
+    border-radius: var(--ai-label-radius);
+    background-color: var(--ai-label-background);
+    color: var(--ai-label-color);
+    font-family: inherit;
+    font-size: var(--ai-label-font-size);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: start;
+    text-decoration: none;
+    text-transform: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    vertical-align: middle;
+}
+
+.ai-label__icon {
+    flex: 0 0 auto;
+    inline-size: 1.4em;
+    block-size: 1.4em;
+    fill: currentColor;
+}
+
+.ai-label__text {
+    min-inline-size: 0;
+}
+
+.ai-label--text-hidden {
+    padding: 0.15em;
+}
+
+/* Visually hidden, still announced by screen readers */
+.ai-label__text--sr-only,
+.ai-label__sr-only {
+    position: absolute !important;
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Own line inside content elements / headers. Inside flex or grid parents it takes a full row
+   instead of a column slot (flex-basis / grid-column), in block parents both are ignored. */
+.ai-label-line {
+    display: block;
+    flex: 1 1 100%;
+    grid-column: 1 / -1;
+    margin: 0.25em 0 0.5em;
+    max-inline-size: 100%;
+}
+
+.ai-label--caption {
+    margin-inline-start: 0.35em;
+}
+
+/* ---- Second layer ---------------------------------------------------- */
+
+.ai-label__more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-inline-size: max(24px, 1.5rem);
+    min-block-size: max(24px, 1.5rem);
+    margin: -0.1em -0.4em -0.1em 0;
+    padding: 0.1em;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.ai-label__more-icon {
+    inline-size: 1.1em;
+    block-size: 1.1em;
+}
+
+.ai-label__more:focus-visible {
+    outline: 2px solid var(--ai-label-focus-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--ai-label-background);
+}
+
+.ai-label__details {
+    box-sizing: border-box;
+    max-inline-size: min(30em, calc(100vw - 2em));
+    margin: auto;
+    padding: 0.75em 1em;
+    border: 1px solid var(--ai-label-color);
+    border-radius: 0.5em;
+    background-color: var(--ai-label-background);
+    color: var(--ai-label-color);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: start;
+}
+
+@supports (anchor-name: --x) {
+    .ai-label__details {
+        margin: 0.25em 0;
+        position-area: bottom span-right;
+        position-try-fallbacks: flip-block, flip-inline;
+    }
+}
+
+/* Browsers without the Popover API: hide the non-functional disclosure */
+@supports not selector(:popover-open) {
+    .ai-label__more,
+    .ai-label__details {
+        display: none;
+    }
+}
+
+/* ---- Video / audio / online media ------------------------------------ */
+
+.ai-label--media {
+    display: flex;
+    inline-size: fit-content;
+    margin-block-start: 0.25em;
+}
+
+.ai-label.ai-label--overlay {
+    pointer-events: none;
+}
+
+/*
+ * Overlay over the player via CSS anchor positioning. anchor-scope binds every overlay to the player
+ * right before it (same parent); without it the last anchor of the page would win.
+ * Top edge only – never over the control bar (WCAG 2.4.11).
+ * Fallback (no support): small static label right after the player.
+ */
+@supports (anchor-name: --x) and (anchor-scope: --x) {
+    :has(> .ai-label--overlay) {
+        anchor-scope: --ai-label-media;
+    }
+
+    :is(video, iframe, object, embed):has(+ .ai-label--overlay) {
+        anchor-name: --ai-label-media;
+    }
+
+    .ai-label.ai-label--overlay {
+        position: absolute;
+        position-anchor: --ai-label-media;
+        inset: auto;
+        top: anchor(top);
+        right: anchor(right);
+        z-index: 1;
+        inline-size: auto;
+        block-size: auto;
+        max-inline-size: calc(anchor-size(width) - 2 * var(--ai-label-overlay-offset));
+        margin: var(--ai-label-overlay-offset);
+    }
+}
+
+/* ---- Forced colors (Windows high contrast) --------------------------- */
+
+@media (forced-colors: active) {
+    .ai-label,
+    .ai-label__details {
+        border-color: CanvasText;
+        background-color: Canvas;
+        color: CanvasText;
+    }
+
+    .ai-label__icon,
+    .ai-label__more-icon {
+        fill: CanvasText;
+    }
+
+    .ai-label__more {
+        color: ButtonText;
+    }
+
+    .ai-label__more-icon {
+        fill: ButtonText;
+    }
+
+    .ai-label__more:focus-visible {
+        outline-color: Highlight;
+        box-shadow: none;
+    }
+}
+
+@media print {
+    .ai-label__more,
+    .ai-label__details {
+        display: none;
+    }
+}

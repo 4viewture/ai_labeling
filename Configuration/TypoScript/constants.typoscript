@@ -1,0 +1,37 @@
+# Frontend output of AI labels (EXT:ai_labeling). TYPO3 v13+: the site set
+# "4viewture/ai-labeling" provides the same values as site settings (settings win over constants).
+
+plugin.tx_ailabeling {
+    # cat=ai_labeling/enable/010; type=boolean; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.css.include
+    css.include = 1
+
+    # cat=ai_labeling/enable/020; type=boolean; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.content.enable
+    content.enable = 1
+
+    # cat=ai_labeling/label/010; type=options[visible,hidden]; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.label.text
+    label.text = visible
+
+    # cat=ai_labeling/label/020; type=boolean; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.label.secondLayer
+    label.secondLayer = 0
+
+    # cat=ai_labeling/images/010; type=boolean; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.images.burnIn
+    images.burnIn = 1
+
+    # cat=ai_labeling/images/020; type=options[top-right,top-left,bottom-right,bottom-left]; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.images.position
+    images.position = top-right
+
+    # cat=ai_labeling/images/030; type=string; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.images.sizePercent
+    images.sizePercent = 8
+
+    # cat=ai_labeling/images/040; type=int+; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.images.minSize
+    images.minSize = 24
+
+    # cat=ai_labeling/images/050; type=int+; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.images.maxSize
+    images.maxSize = 96
+
+    # cat=ai_labeling/images/060; type=boolean; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.images.altText
+    images.altText = 1
+
+    # cat=ai_labeling/media/010; type=boolean; label=LLL:EXT:ai_labeling/Resources/Private/Language/locallang.xlf:constants.media.overlay
+    media.overlay = 1
+}

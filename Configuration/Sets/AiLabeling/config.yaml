@@ -1,0 +1,6 @@
+# TYPO3 13.4+ site set. Same TypoScript as the static template (Configuration/TypoScript),
+# the constants are provided as site settings (settings.definitions.yaml).
+name: 4viewture/ai-labeling
+label: 'AI Labeling (EU AI Act Art. 50)'
+optionalDependencies:
+  - typo3/fluid-styled-content

@@ -1,0 +1,29 @@
+# Frontend output of AI labels (EXT:ai_labeling)
+
+plugin.tx_ailabeling.settings {
+    css.include = {$plugin.tx_ailabeling.css.include}
+    content.enable = {$plugin.tx_ailabeling.content.enable}
+    label {
+        text = {$plugin.tx_ailabeling.label.text}
+        secondLayer = {$plugin.tx_ailabeling.label.secondLayer}
+    }
+    images {
+        burnIn = {$plugin.tx_ailabeling.images.burnIn}
+        position = {$plugin.tx_ailabeling.images.position}
+        sizePercent = {$plugin.tx_ailabeling.images.sizePercent}
+        minSize = {$plugin.tx_ailabeling.images.minSize}
+        maxSize = {$plugin.tx_ailabeling.images.maxSize}
+        altText = {$plugin.tx_ailabeling.images.altText}
+    }
+    media.overlay = {$plugin.tx_ailabeling.media.overlay}
+}
+
+page {
+    includeCSS.aiLabeling = EXT:ai_labeling/Resources/Public/Css/ai-label.css
+    includeCSS.aiLabeling.if.isTrue = {$plugin.tx_ailabeling.css.include}
+
+    # Second layer only: keeps aria-expanded of the disclosure button in sync (Popover API)
+    includeJSFooter.aiLabeling = EXT:ai_labeling/Resources/Public/JavaScript/ai-label.js
+    includeJSFooter.aiLabeling.defer = 1
+    includeJSFooter.aiLabeling.if.isTrue = {$plugin.tx_ailabeling.label.secondLayer}
+}

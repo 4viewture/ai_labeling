@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:ai_labeling/Resources/Private/Language/locallang.xlf" product-name="ai_labeling">
+		<header/>
+		<body>
+			<trans-unit id="secondLayer.button" resname="secondLayer.button">
+				<source>More information about this AI label</source>
+			</trans-unit>
+			<trans-unit id="secondLayer.generated" resname="secondLayer.generated">
+				<source>This content was generated with artificial intelligence (AI). We label AI-generated content in line with Article 50 of the EU AI Act.</source>
+			</trans-unit>
+			<trans-unit id="secondLayer.modified" resname="secondLayer.modified">
+				<source>This content was modified with artificial intelligence (AI). We label AI-modified content in line with Article 50 of the EU AI Act.</source>
+			</trans-unit>
+			<trans-unit id="constants.css.include" resname="constants.css.include">
+				<source>Include CSS: load the stylesheet of the AI label (ai-label.css)</source>
+			</trans-unit>
+			<trans-unit id="constants.content.enable" resname="constants.content.enable">
+				<source>Label content elements: add the label to labelled content elements (tt_content.stdWrap.postUserFunc)</source>
+			</trans-unit>
+			<trans-unit id="constants.label.text" resname="constants.label.text">
+				<source>Label text: visible, or hidden (only for screen readers, the icon stays visible)</source>
+			</trans-unit>
+			<trans-unit id="constants.label.secondLayer" resname="constants.label.secondLayer">
+				<source>Second layer: button with an explanation next to the label</source>
+			</trans-unit>
+			<trans-unit id="constants.images.burnIn" resname="constants.images.burnIn">
+				<source>Burn the AI symbol into processed images</source>
+			</trans-unit>
+			<trans-unit id="constants.images.position" resname="constants.images.position">
+				<source>Position of the burned-in symbol</source>
+			</trans-unit>
+			<trans-unit id="constants.images.sizePercent" resname="constants.images.sizePercent">
+				<source>Symbol size in percent of the shorter image edge</source>
+			</trans-unit>
+			<trans-unit id="constants.images.minSize" resname="constants.images.minSize">
+				<source>Minimum symbol size (px)</source>
+			</trans-unit>
+			<trans-unit id="constants.images.maxSize" resname="constants.images.maxSize">
+				<source>Maximum symbol size (px)</source>
+			</trans-unit>
+			<trans-unit id="constants.images.altText" resname="constants.images.altText">
+				<source>Append the label text to the alternative text and caption of labelled images</source>
+			</trans-unit>
+			<trans-unit id="constants.media.overlay" resname="constants.media.overlay">
+				<source>Show the label as overlay on top of videos (anchor positioning, fallback: below the player)</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
