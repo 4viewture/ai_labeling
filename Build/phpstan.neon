@@ -1,0 +1,20 @@
+# Static analysis, run against each supported TYPO3 version (see .github/workflows/ci.yml).
+# Version branches (method_exists()/class_exists()) are expected to look "always true/false" on some
+# versions – those findings are ignored by identifier, unmatched ignores are not reported.
+parameters:
+  level: 5
+  paths:
+    - ../Classes
+  tmpDir: ../.Build/.phpstan
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    - identifier: function.alreadyNarrowedType
+    - identifier: function.impossibleType
+    # Events that exist only in some versions; listeners are never dispatched where the event is missing
+    - identifier: class.notFound
+      path: ../Classes/EventListener/AiRecordIconOverlay.php       # ModifyRecordOverlayIconIdentifierEvent: 13.0+
+    - identifier: class.notFound
+      path: ../Classes/EventListener/AiFileListRowBadge.php        # AfterFileListRowPreparedEvent: 14.0+
+    # 12.4/13.4 only, guarded by method_exists($event, 'getContent') (TYPO3 14 content API)
+    - identifier: method.notFound
+      path: ../Classes/EventListener/LabelImagesInContent.php

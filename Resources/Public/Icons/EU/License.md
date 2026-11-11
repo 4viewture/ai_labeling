@@ -29,3 +29,16 @@ How to sign the Code of Practice on transparency of AI-generated content
 Questions & Answers - Signing the Code of Practice on transparency of AI-Genera…
 Questions & Answers - Code of Practice on Transparency of AI-Generated Content
 Guidelines on Transparency of AI-Generated Content
+
+## German variants (ki-*.svg) – not official EU icons
+
+`ki-symbol-*`, `ki-generated-*` ("KI GENERIERT") and `ki-modified-*` ("KI VERÄNDERT") are derived from
+the official files above by `Build/generate-german-icons.py`. The background shapes and all letters
+that exist in the official artwork are reused unchanged; the missing glyphs K, V and Ä are taken from
+the typeface of the artwork, **Rubik** (weights 700/600, © The Rubik Project Authors, SIL Open Font
+License 1.1, https://github.com/googlefonts/rubik).
+
+They are **not** published by the European Commission. The Code of Practice (Measure 1.1 a) asks for
+the English acronym "AI" unless the use of English is incompatible with national laws on the use of
+languages; the extension therefore uses "AI" by default (`label.symbol`, `images.symbol`).
+

@@ -48,6 +48,25 @@ final class LabelSettingsTest extends TestCase
     }
 
     #[Test]
+    public function symbolSettings(): void
+    {
+        $default = LabelSettings::fromTypoScript([]);
+        self::assertSame('ai', $default->labelSymbol('de'));
+        self::assertSame('ai', $default->imageSymbol());
+        self::assertSame('ai', $default->burnInParameters()['symbol']);
+
+        $auto = LabelSettings::fromTypoScript(['label.' => ['symbol' => 'auto'], 'images.' => ['symbol' => 'KI']]);
+        self::assertSame('ki', $auto->labelSymbol('de'));
+        self::assertSame('ai', $auto->labelSymbol('en'));
+        self::assertSame('ai', $auto->labelSymbol(''));
+        self::assertSame('ki', $auto->imageSymbol());
+
+        $invalid = LabelSettings::fromTypoScript(['label.' => ['symbol' => 'xy'], 'images.' => ['symbol' => 'auto']]);
+        self::assertSame('ai', $invalid->labelSymbol('de'));
+        self::assertSame('ai', $invalid->imageSymbol(), 'no auto for burned-in images');
+    }
+
+    #[Test]
     public function invalidValuesFallBackToDefaults(): void
     {
         $settings = LabelSettings::fromTypoScript(['images.' => ['position' => 'center', 'sizePercent' => '90']]);

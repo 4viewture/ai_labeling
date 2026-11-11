@@ -177,6 +177,9 @@ TYPO3 gibt die Kennzeichnung automatisch aus, sobald die Einschätzung „Wird g
 
 Hinweise für die Redaktion:
 
+- **„AI“ oder „KI“:** Standardmäßig zeigt TYPO3 das EU-Symbol „AI“. Der Integrator kann die deutsche
+  Variante „KI“ einstellen (kein offizielles EU-Icon; der Verhaltenskodex sieht „AI“ vor, solange
+  Englisch nicht gegen nationales Sprachrecht verstößt).
 - **Kennzeichnungstext:** kurz, in einfacher Sprache, ohne Fachbegriffe und Abkürzungen außer „KI“.
   Leer lassen = Standardtext. Der Text ist je Sprache übersetzbar; die Entscheidung *ob*
   gekennzeichnet wird, gilt für alle Sprachen.

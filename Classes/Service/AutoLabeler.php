@@ -125,12 +125,8 @@ final class AutoLabeler implements LoggerAwareInterface
 
     private function getFileType(File $file): int
     {
-        $type = $file->getType();
-        // TYPO3 v14 may return an enum (FileType) instead of an int
-        if ($type instanceof \BackedEnum) {
-            return (int)$type->value;
-        }
-        return (int)$type;
+        // getType(): int in 12.4 (untyped), 13.4 and 14.3
+        return (int)$file->getType();
     }
 
     /**

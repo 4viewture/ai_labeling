@@ -23,7 +23,8 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 final class LabelRenderer
 {
-    private const SYMBOL_FILE = 'Resources/Public/Icons/EU/ai-symbol-black.svg';
+    /** %s = ai (EU original) | ki (German variant, same disc and geometry) */
+    private const SYMBOL_FILE = 'Resources/Public/Icons/EU/%s-symbol-black.svg';
 
     /**
      * Bounding box of the disc in the official SVG (viewBox 0 0 566.93 566.93):
@@ -33,7 +34,8 @@ final class LabelRenderer
 
     private const MODIFIERS = ['overlay', 'media', 'content', 'caption'];
 
-    private static ?string $symbolPath = null;
+    /** @var array<string, string> */
+    private static array $symbolPaths = [];
 
     public function __construct(
         private readonly FrontendContext $context,
@@ -83,7 +85,7 @@ final class LabelRenderer
         }
 
         $html = '<span class="' . implode(' ', $classes) . '" data-ai-label="' . $label->type . '">'
-            . $this->renderIcon()
+            . $this->renderIcon($settings->labelSymbol($this->context->getLanguageCode($request)))
             . '<span class="ai-label__text' . ($textVisible ? '' : ' ai-label__text--sr-only') . '">'
             . self::escape($label->text) . '</span>';
 
@@ -93,11 +95,11 @@ final class LabelRenderer
         return $html . '</span>';
     }
 
-    public function renderIcon(): string
+    public function renderIcon(string $symbol = 'ai'): string
     {
         return '<svg class="ai-label__icon" viewBox="' . self::SYMBOL_VIEWBOX . '" fill="currentColor"'
             . ' aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">'
-            . '<path fill-rule="evenodd" d="' . self::symbolPath() . '"/></svg>';
+            . '<path fill-rule="evenodd" d="' . self::symbolPath($symbol) . '"/></svg>';
     }
 
     /**
@@ -117,14 +119,15 @@ final class LabelRenderer
             . '</span>';
     }
 
-    private static function symbolPath(): string
+    private static function symbolPath(string $symbol): string
     {
-        if (self::$symbolPath === null) {
-            $svg = (string)@file_get_contents(dirname(__DIR__, 2) . '/' . self::SYMBOL_FILE);
+        $symbol = in_array($symbol, ['ai', 'ki'], true) ? $symbol : 'ai';
+        if (!isset(self::$symbolPaths[$symbol])) {
+            $svg = (string)@file_get_contents(dirname(__DIR__, 2) . '/' . sprintf(self::SYMBOL_FILE, $symbol));
             preg_match_all('/\sd="([^"]+)"/', $svg, $matches);
-            self::$symbolPath = self::escape(implode(' ', $matches[1] ?? []));
+            self::$symbolPaths[$symbol] = self::escape(implode(' ', $matches[1]));
         }
-        return self::$symbolPath;
+        return self::$symbolPaths[$symbol];
     }
 
     public static function escape(string $value): string

@@ -9,6 +9,7 @@ use FourViewture\AiLabeling\Frontend\FrontendContext;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\OnlineMedia\Event\AfterVideoPreviewFetchedEvent;
+use TYPO3\CMS\Core\Resource\OnlineMedia\Helpers\OnlineMediaHelperInterface;
 use TYPO3\CMS\Core\Resource\OnlineMedia\Helpers\OnlineMediaHelperRegistry;
 use TYPO3\CMS\Core\Resource\Processing\LocalImageProcessor;
 use TYPO3\CMS\Core\Resource\Processing\TaskInterface;
@@ -47,7 +48,7 @@ final class AiLabelImageProcessor extends LocalImageProcessor
             return false;
         }
         $source = $task->getSourceFile();
-        if (!$source instanceof File || !in_array(self::targetExtension($task), self::RASTER_EXTENSIONS, true)) {
+        if (!in_array(self::targetExtension($task), self::RASTER_EXTENSIONS, true)) {
             return false;
         }
         if (GeneralUtility::makeInstance(FileLabelResolver::class)->labelForFile($source) === null) {
@@ -140,7 +141,7 @@ final class AiLabelImageProcessor extends LocalImageProcessor
     {
         try {
             $helper = GeneralUtility::makeInstance(OnlineMediaHelperRegistry::class)->getOnlineMediaHelper($file);
-            if ($helper === false || $helper === null) {
+            if (!$helper instanceof OnlineMediaHelperInterface) {
                 return '';
             }
             $event = new AfterVideoPreviewFetchedEvent($file, $helper, $helper->getPreviewImage($file));

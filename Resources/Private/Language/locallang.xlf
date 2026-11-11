@@ -24,6 +24,12 @@
 			<trans-unit id="constants.label.secondLayer" resname="constants.label.secondLayer">
 				<source>Second layer: button with an explanation next to the label</source>
 			</trans-unit>
+			<trans-unit id="constants.label.symbol" resname="constants.label.symbol">
+				<source>Symbol of the label: ai (EU icon &quot;AI&quot;, default), ki (German variant &quot;KI&quot;), auto (KI on German site languages)</source>
+			</trans-unit>
+			<trans-unit id="constants.images.symbol" resname="constants.images.symbol">
+				<source>Burned-in symbol: ai (EU icon &quot;AI&quot;, default) or ki (German variant &quot;KI&quot;); clear processed files after changing</source>
+			</trans-unit>
 			<trans-unit id="constants.images.burnIn" resname="constants.images.burnIn">
 				<source>Burn the AI symbol into processed images</source>
 			</trans-unit>

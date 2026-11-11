@@ -1,0 +1,128 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['*']
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # weekly: catches breaking changes in new TYPO3 patch releases
+    - cron: '17 4 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: PHP lint ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.1', '8.2', '8.3', '8.4', '8.5']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: none
+      - name: Lint PHP files
+        run: find Classes Configuration Tests Build ./*.php -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v '^No syntax errors')
+
+  assets:
+    name: Composer, XLIFF, YAML, SVG
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-lock
+      - name: Install linters
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxml2-utils
+          pipx install yamllint
+      - name: XLIFF and SVG are well-formed XML
+        run: find Resources Configuration -name '*.xlf' -o -name '*.svg' | xargs -n50 xmllint --noout
+      - name: XLIFF de translations match the source files
+        run: |
+          rc=0
+          while IFS= read -r de; do
+            src="$(dirname "$de")/$(basename "$de" | sed 's/^de\.//')"
+            a=$(grep -o 'trans-unit id="[^"]*"' "$src" | sort); b=$(grep -o 'trans-unit id="[^"]*"' "$de" | sort)
+            if [ "$a" != "$b" ]; then echo "::error file=$de::trans-unit ids differ from $src"; diff <(echo "$a") <(echo "$b") || true; rc=1; fi
+          done < <(find Resources Configuration -name 'de.*.xlf')
+          exit $rc
+      - name: YAML
+        run: |
+          yamllint -d '{extends: relaxed, rules: {line-length: disable}}' Configuration .github
+
+  cgl:
+    name: Coding guidelines
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer
+          key: composer-cgl-${{ hashFiles('composer.json') }}
+      - run: composer update --prefer-dist --no-progress
+      - run: composer ci:php:cs
+
+  tests:
+    name: TYPO3 ${{ matrix.typo3 }} / PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { typo3: '^12.4', php: '8.1' }
+          - { typo3: '^12.4', php: '8.3' }
+          - { typo3: '^13.4', php: '8.2' }
+          - { typo3: '^13.4', php: '8.4' }
+          - { typo3: '^14.0', php: '8.2' }
+          - { typo3: '^14.0', php: '8.4' }
+          - { typo3: '^14.0', php: '8.5' }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: gd, intl, mbstring, zip
+          coverage: none
+          tools: composer:v2
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer
+          key: composer-${{ matrix.typo3 }}-${{ matrix.php }}-${{ hashFiles('composer.json') }}
+      - name: Allow TYPO3 12.4 releases with security advisories (12.4 is ELTS only, test install only)
+        if: matrix.typo3 == '^12.4'
+        run: composer config policy.advisories.block false
+      - name: Install TYPO3 ${{ matrix.typo3 }}
+        run: |
+          composer require --no-update --no-interaction \
+            typo3/cms-core:"${{ matrix.typo3 }}" typo3/cms-backend:"${{ matrix.typo3 }}" \
+            typo3/cms-extbase:"${{ matrix.typo3 }}" typo3/cms-fluid:"${{ matrix.typo3 }}" \
+            typo3/cms-frontend:"${{ matrix.typo3 }}"
+          composer require --dev --no-update --no-interaction typo3/cms-filelist:"${{ matrix.typo3 }}"
+          composer update --prefer-dist --no-progress --no-interaction --with-all-dependencies
+          composer show typo3/cms-core phpunit/phpunit | grep -E '^(name|versions)'
+      - name: PHPStan
+        run: composer ci:php:stan
+      - name: Unit tests
+        run: composer ci:tests:unit

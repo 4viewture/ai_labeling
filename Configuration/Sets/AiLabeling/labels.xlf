@@ -48,6 +48,33 @@
 			<trans-unit id="settings.description.plugin.tx_ailabeling.label.secondLayer" resname="settings.description.plugin.tx_ailabeling.label.secondLayer">
 				<source>Adds a button with an explanation next to the label (Popover API).</source>
 			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol" resname="settings.plugin.tx_ailabeling.label.symbol">
+				<source>Symbol (AI / KI)</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.label.symbol" resname="settings.description.plugin.tx_ailabeling.label.symbol">
+				<source>The Code of Practice uses the English acronym &quot;AI&quot;; the national acronym only where English is incompatible with national language law (Measure 1.1 a). &quot;Auto&quot; shows &quot;KI&quot; on German site languages.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol.enum.ai" resname="settings.plugin.tx_ailabeling.label.symbol.enum.ai">
+				<source>AI (EU icon)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol.enum.ki" resname="settings.plugin.tx_ailabeling.label.symbol.enum.ki">
+				<source>KI (German variant)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol.enum.auto" resname="settings.plugin.tx_ailabeling.label.symbol.enum.auto">
+				<source>Automatic (KI on German site languages)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.symbol" resname="settings.plugin.tx_ailabeling.images.symbol">
+				<source>Burned-in symbol (AI / KI)</source>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.images.symbol" resname="settings.description.plugin.tx_ailabeling.images.symbol">
+				<source>Processed images are shared by all languages, therefore no automatic choice. Clear processed files after changing.</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.symbol.enum.ai" resname="settings.plugin.tx_ailabeling.images.symbol.enum.ai">
+				<source>AI (EU icon)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.symbol.enum.ki" resname="settings.plugin.tx_ailabeling.images.symbol.enum.ki">
+				<source>KI (German variant)</source>
+			</trans-unit>
 			<trans-unit id="settings.plugin.tx_ailabeling.images.burnIn" resname="settings.plugin.tx_ailabeling.images.burnIn">
 				<source>Burn symbol into images</source>
 			</trans-unit>

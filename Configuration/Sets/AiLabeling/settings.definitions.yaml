@@ -29,6 +29,14 @@ settings:
     type: bool
     default: false
     category: ailabeling.label
+  plugin.tx_ailabeling.label.symbol:
+    type: string
+    default: ai
+    enum:
+      ai: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.label.symbol.enum.ai'
+      ki: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.label.symbol.enum.ki'
+      auto: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.label.symbol.enum.auto'
+    category: ailabeling.label
   plugin.tx_ailabeling.images.burnIn:
     type: bool
     default: true
@@ -57,6 +65,13 @@ settings:
   plugin.tx_ailabeling.images.altText:
     type: bool
     default: true
+    category: ailabeling.images
+  plugin.tx_ailabeling.images.symbol:
+    type: string
+    default: ai
+    enum:
+      ai: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.images.symbol.enum.ai'
+      ki: 'LLL:EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf:settings.plugin.tx_ailabeling.images.symbol.enum.ki'
     category: ailabeling.images
   plugin.tx_ailabeling.media.overlay:
     type: bool

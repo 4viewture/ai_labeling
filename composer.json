@@ -1,16 +1,22 @@
 {
     "name": "4viewture/ai-labeling",
     "type": "typo3-cms-extension",
-    "description": "Transparency fields for AI-generated or AI-modified files and content elements (Art. 50 EU AI Act), including an editor guide and automatic detection from file metadata (IPTC/XMP, C2PA, EXIF, PNG text chunks).",
+    "description": "Transparency fields and frontend labels for AI-generated or AI-modified content (Art. 50 EU AI Act): editor guide, automatic detection from file metadata (IPTC/XMP, C2PA, EXIF, PNG text chunks), EU icons in content, images, video and audio (WCAG 2.2 AA).",
     "license": "GPL-2.0-or-later",
-    "keywords": ["TYPO3", "AI Act", "KI-Verordnung", "Kennzeichnung", "C2PA", "IPTC"],
+    "keywords": ["TYPO3", "AI Act", "KI-Verordnung", "Kennzeichnung", "C2PA", "IPTC", "accessibility"],
     "require": {
         "php": "^8.1",
+        "typo3/cms-backend": "^12.4 || ^13.4 || ^14.0",
         "typo3/cms-core": "^12.4 || ^13.4 || ^14.0",
-        "typo3/cms-backend": "^12.4 || ^13.4 || ^14.0"
+        "typo3/cms-extbase": "^12.4 || ^13.4 || ^14.0",
+        "typo3/cms-fluid": "^12.4 || ^13.4 || ^14.0",
+        "typo3/cms-frontend": "^12.4 || ^13.4 || ^14.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.5 || ^11.0"
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^10.5 || ^11.5 || ^12.0",
+        "typo3/cms-filelist": "^12.4 || ^13.4 || ^14.0"
     },
     "autoload": {
         "psr-4": {
@@ -22,9 +28,34 @@
             "FourViewture\\AiLabeling\\Tests\\": "Tests/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        },
+        "bin-dir": ".Build/bin",
+        "sort-packages": true,
+        "vendor-dir": ".Build/vendor"
+    },
     "extra": {
         "typo3/cms": {
-            "extension-key": "ai_labeling"
+            "extension-key": "ai_labeling",
+            "web-dir": ".Build/public"
         }
+    },
+    "scripts": {
+        "ci:composer:validate": "@composer validate --strict --no-check-lock",
+        "ci:php:lint": "find Classes Configuration Tests Build ./*.php -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n > /dev/null",
+        "ci:php:cs": "php-cs-fixer fix --dry-run --diff --config=Build/php-cs-fixer.php",
+        "ci:php:stan": "phpstan analyse --no-progress --memory-limit=1G --configuration=Build/phpstan.neon",
+        "ci:tests:unit": "phpunit -c phpunit.xml.dist",
+        "ci": [
+            "@ci:composer:validate",
+            "@ci:php:lint",
+            "@ci:php:cs",
+            "@ci:php:stan",
+            "@ci:tests:unit"
+        ],
+        "fix:php:cs": "php-cs-fixer fix --config=Build/php-cs-fixer.php"
     }
 }

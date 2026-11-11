@@ -63,6 +63,42 @@
 				<source>Adds a button with an explanation next to the label (Popover API).</source>
 				<target state="translated">Ergänzt eine Schaltfläche mit Erklärung neben der Kennzeichnung (Popover API).</target>
 			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol" resname="settings.plugin.tx_ailabeling.label.symbol">
+				<source>Symbol (AI / KI)</source>
+				<target state="translated">Symbol (AI / KI)</target>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.label.symbol" resname="settings.description.plugin.tx_ailabeling.label.symbol">
+				<source>The Code of Practice uses the English acronym &quot;AI&quot;; the national acronym only where English is incompatible with national language law (Measure 1.1 a). &quot;Auto&quot; shows &quot;KI&quot; on German site languages.</source>
+				<target state="translated">Der Verhaltenskodex verwendet das englische Kürzel „AI“; das nationale Kürzel nur, wenn Englisch mit nationalem Sprachrecht unvereinbar ist (Maßnahme 1.1 a). „Automatisch“ zeigt „KI“ bei deutscher Seitensprache.</target>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol.enum.ai" resname="settings.plugin.tx_ailabeling.label.symbol.enum.ai">
+				<source>AI (EU icon)</source>
+				<target state="translated">AI (EU-Icon)</target>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol.enum.ki" resname="settings.plugin.tx_ailabeling.label.symbol.enum.ki">
+				<source>KI (German variant)</source>
+				<target state="translated">KI (deutsche Variante)</target>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.label.symbol.enum.auto" resname="settings.plugin.tx_ailabeling.label.symbol.enum.auto">
+				<source>Automatic (KI on German site languages)</source>
+				<target state="translated">Automatisch (KI bei deutscher Seitensprache)</target>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.symbol" resname="settings.plugin.tx_ailabeling.images.symbol">
+				<source>Burned-in symbol (AI / KI)</source>
+				<target state="translated">Eingebranntes Symbol (AI / KI)</target>
+			</trans-unit>
+			<trans-unit id="settings.description.plugin.tx_ailabeling.images.symbol" resname="settings.description.plugin.tx_ailabeling.images.symbol">
+				<source>Processed images are shared by all languages, therefore no automatic choice. Clear processed files after changing.</source>
+				<target state="translated">Verarbeitete Bilder gelten für alle Sprachen, daher keine automatische Wahl. Nach Änderung verarbeitete Dateien leeren.</target>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.symbol.enum.ai" resname="settings.plugin.tx_ailabeling.images.symbol.enum.ai">
+				<source>AI (EU icon)</source>
+				<target state="translated">AI (EU-Icon)</target>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_ailabeling.images.symbol.enum.ki" resname="settings.plugin.tx_ailabeling.images.symbol.enum.ki">
+				<source>KI (German variant)</source>
+				<target state="translated">KI (deutsche Variante)</target>
+			</trans-unit>
 			<trans-unit id="settings.plugin.tx_ailabeling.images.burnIn" resname="settings.plugin.tx_ailabeling.images.burnIn">
 				<source>Burn symbol into images</source>
 				<target state="translated">Symbol in Bilder einbrennen</target>

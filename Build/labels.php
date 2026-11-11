@@ -1,4 +1,5 @@
 <?php
+
 // Source of the frontend / constants / site set labels (en + de). Run: php Build/labels.php
 declare(strict_types=1);
 
@@ -16,6 +17,8 @@ $frontend = [
     'constants.content.enable' => ['Label content elements: add the label to labelled content elements (tt_content.stdWrap.postUserFunc)', 'Inhaltselemente kennzeichnen: Kennzeichnung an gekennzeichneten Inhaltselementen ausgeben (tt_content.stdWrap.postUserFunc)'],
     'constants.label.text' => ['Label text: visible, or hidden (only for screen readers, the icon stays visible)', 'Kennzeichnungstext: sichtbar oder ausgeblendet (nur für Screenreader, das Icon bleibt sichtbar)'],
     'constants.label.secondLayer' => ['Second layer: button with an explanation next to the label', 'Zweite Ebene: Schaltfläche mit Erklärung neben der Kennzeichnung'],
+    'constants.label.symbol' => ['Symbol of the label: ai (EU icon "AI", default), ki (German variant "KI"), auto (KI on German site languages)', 'Symbol der Kennzeichnung: ai (EU-Icon „AI“, Standard), ki (deutsche Variante „KI“), auto (KI bei deutscher Seitensprache)'],
+    'constants.images.symbol' => ['Burned-in symbol: ai (EU icon "AI", default) or ki (German variant "KI"); clear processed files after changing', 'Eingebranntes Symbol: ai (EU-Icon „AI“, Standard) oder ki (deutsche Variante „KI“); danach verarbeitete Dateien leeren'],
     'constants.images.burnIn' => ['Burn the AI symbol into processed images', 'KI-Symbol in verarbeitete Bilder einbrennen'],
     'constants.images.position' => ['Position of the burned-in symbol', 'Position des eingebrannten Symbols'],
     'constants.images.sizePercent' => ['Symbol size in percent of the shorter image edge', 'Symbolgröße in Prozent der kürzeren Bildkante'],
@@ -41,6 +44,15 @@ $set = [
     'settings.plugin.tx_ailabeling.label.text.enum.hidden' => ['Hidden (screen readers only)', 'Ausgeblendet (nur Screenreader)'],
     'settings.plugin.tx_ailabeling.label.secondLayer' => ['Second layer', 'Zweite Ebene'],
     'settings.description.plugin.tx_ailabeling.label.secondLayer' => ['Adds a button with an explanation next to the label (Popover API).', 'Ergänzt eine Schaltfläche mit Erklärung neben der Kennzeichnung (Popover API).'],
+    'settings.plugin.tx_ailabeling.label.symbol' => ['Symbol (AI / KI)', 'Symbol (AI / KI)'],
+    'settings.description.plugin.tx_ailabeling.label.symbol' => ['The Code of Practice uses the English acronym "AI"; the national acronym only where English is incompatible with national language law (Measure 1.1 a). "Auto" shows "KI" on German site languages.', 'Der Verhaltenskodex verwendet das englische Kürzel „AI“; das nationale Kürzel nur, wenn Englisch mit nationalem Sprachrecht unvereinbar ist (Maßnahme 1.1 a). „Automatisch“ zeigt „KI“ bei deutscher Seitensprache.'],
+    'settings.plugin.tx_ailabeling.label.symbol.enum.ai' => ['AI (EU icon)', 'AI (EU-Icon)'],
+    'settings.plugin.tx_ailabeling.label.symbol.enum.ki' => ['KI (German variant)', 'KI (deutsche Variante)'],
+    'settings.plugin.tx_ailabeling.label.symbol.enum.auto' => ['Automatic (KI on German site languages)', 'Automatisch (KI bei deutscher Seitensprache)'],
+    'settings.plugin.tx_ailabeling.images.symbol' => ['Burned-in symbol (AI / KI)', 'Eingebranntes Symbol (AI / KI)'],
+    'settings.description.plugin.tx_ailabeling.images.symbol' => ['Processed images are shared by all languages, therefore no automatic choice. Clear processed files after changing.', 'Verarbeitete Bilder gelten für alle Sprachen, daher keine automatische Wahl. Nach Änderung verarbeitete Dateien leeren.'],
+    'settings.plugin.tx_ailabeling.images.symbol.enum.ai' => ['AI (EU icon)', 'AI (EU-Icon)'],
+    'settings.plugin.tx_ailabeling.images.symbol.enum.ki' => ['KI (German variant)', 'KI (deutsche Variante)'],
     'settings.plugin.tx_ailabeling.images.burnIn' => ['Burn symbol into images', 'Symbol in Bilder einbrennen'],
     'settings.description.plugin.tx_ailabeling.images.burnIn' => ['Composites the EU "AI" symbol onto processed frontend images. Clear processed files after changing image settings.', 'Fügt das EU-Symbol „AI“ in verarbeitete Frontend-Bilder ein. Nach Änderungen an den Bildeinstellungen die verarbeiteten Dateien leeren.'],
     'settings.plugin.tx_ailabeling.images.position' => ['Symbol position', 'Position des Symbols'],

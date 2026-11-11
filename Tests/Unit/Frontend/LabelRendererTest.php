@@ -58,6 +58,18 @@ final class LabelRendererTest extends TestCase
     }
 
     #[Test]
+    public function germanSymbolVariantUsesSameDiscWithOtherLetters(): void
+    {
+        $ai = $this->subject->renderIcon('ai');
+        $ki = $this->subject->renderIcon('ki');
+        self::assertNotSame($ai, $ki);
+        // same disc (first sub path) and viewBox, letters K + I
+        self::assertStringContainsString('d="M272.03,100.72c100.92,0,182.74', $ki);
+        self::assertSame(1, preg_match_all('/viewBox="89.28 100.72 365.5 365.5"/', $ki));
+        self::assertSame($ai, $this->subject->renderIcon('unknown'));
+    }
+
+    #[Test]
     public function hiddenTextKeepsTextForScreenReaders(): void
     {
         $html = $this->subject->render(new Label(Label::MODIFIED, 'Mit KI verändert'), ['textVisible' => false]);

@@ -10,7 +10,7 @@ use Psr\Log\LoggerAwareTrait;
 
 /**
  * Composites the compact EU "AI" symbol (Resources/Private/Images/ai-symbol-{black,white}.png,
- * rasterized from the official SVGs by Build/rasterize-icons.sh) onto a local raster image, in place.
+ * rasterized from the official SVGs by Build/rasterize-icons.sh; German variant ki-symbol-*.png) onto a local raster image, in place.
  * GD is used if available, Imagick otherwise. Any failure returns false (caller logs, no label).
  */
 final class ImageLabelCompositor implements LoggerAwareInterface
@@ -24,24 +24,27 @@ final class ImageLabelCompositor implements LoggerAwareInterface
     /** Sample grid per axis for the contrast measurement */
     private const SAMPLES = 24;
 
+    private string $symbol = 'ai';
+
     /** Backing plate radius relative to the symbol */
     private const PLATE_FACTOR = 1.14;
 
     /**
-     * @param array{position: string, sizePercent: float, minSize: int, maxSize: int} $parameters
+     * @param array{position: string, sizePercent: float, minSize: int, maxSize: int, symbol?: string} $parameters
      * @return self::RESULT_*
      */
     public function composite(string $path, array $parameters): string
     {
         $info = @getimagesize($path);
-        if (!is_array($info) || ($info[0] ?? 0) <= 0 || ($info[1] ?? 0) <= 0) {
+        if (!is_array($info) || $info[0] <= 0 || $info[1] <= 0) {
             return self::RESULT_FAILED;
         }
         $placement = Contrast::placement((int)$info[0], (int)$info[1], $parameters['position'], $parameters['sizePercent'], $parameters['minSize'], $parameters['maxSize']);
         if ($placement === null) {
             return self::RESULT_SKIPPED;
         }
-        $mime = (string)($info['mime'] ?? '');
+        $mime = $info['mime'];
+        $this->symbol = (string)($parameters['symbol'] ?? 'ai');
         try {
             if (self::gdSupports($mime)) {
                 return $this->compositeWithGd($path, $mime, $placement);
@@ -57,9 +60,13 @@ final class ImageLabelCompositor implements LoggerAwareInterface
         return self::RESULT_FAILED;
     }
 
-    public static function symbolPath(string $colour): string
+    /**
+     * @param string $symbol ai (EU original) | ki (German variant)
+     */
+    public static function symbolPath(string $colour, string $symbol = 'ai'): string
     {
-        return dirname(__DIR__, 3) . '/Resources/Private/Images/ai-symbol-' . $colour . '.png';
+        $symbol = in_array($symbol, ['ai', 'ki'], true) ? $symbol : 'ai';
+        return dirname(__DIR__, 3) . '/Resources/Private/Images/' . $symbol . '-symbol-' . $colour . '.png';
     }
 
     private static function gdSupports(string $mime): bool
@@ -84,6 +91,7 @@ final class ImageLabelCompositor implements LoggerAwareInterface
             'image/png' => @imagecreatefrompng($path),
             'image/webp' => @imagecreatefromwebp($path),
             'image/gif' => @imagecreatefromgif($path),
+            default => false,
         };
         if ($image === false) {
             return self::RESULT_FAILED;
@@ -104,10 +112,11 @@ final class ImageLabelCompositor implements LoggerAwareInterface
         }
 
         $quality = static fn(string $key): int => max(1, min(100, (int)($GLOBALS['TYPO3_CONF_VARS']['GFX'][$key] ?? 85)));
+        imagesavealpha($image, true);
         $saved = match ($mime) {
             'image/jpeg' => imagejpeg($image, $path, $quality('jpg_quality')),
-            'image/png' => imagesavealpha($image, true) && imagepng($image, $path),
-            'image/webp' => imagesavealpha($image, true) && imagewebp($image, $path, isset($GLOBALS['TYPO3_CONF_VARS']['GFX']['webp_quality']) ? $quality('webp_quality') : 85),
+            'image/png' => imagepng($image, $path),
+            'image/webp' => imagewebp($image, $path, isset($GLOBALS['TYPO3_CONF_VARS']['GFX']['webp_quality']) ? $quality('webp_quality') : 85),
             'image/gif' => imagegif($image, $path),
         };
         return $saved ? self::RESULT_DONE : self::RESULT_FAILED;
@@ -147,7 +156,7 @@ final class ImageLabelCompositor implements LoggerAwareInterface
      */
     private function drawSymbolGd($image, string $colour, int $x, int $y, int $size): void
     {
-        $symbol = @imagecreatefrompng(self::symbolPath($colour));
+        $symbol = @imagecreatefrompng(self::symbolPath($colour, $this->symbol));
         if ($symbol === false) {
             throw new \RuntimeException('Symbol ' . $colour . ' not readable', 1762790501);
         }
@@ -174,7 +183,7 @@ final class ImageLabelCompositor implements LoggerAwareInterface
         for ($sy = 0; $sy < self::SAMPLES; $sy++) {
             for ($sx = 0; $sx < self::SAMPLES; $sx++) {
                 $color = $image->getImagePixelColor((int)($placement['x'] + $sx * $step), (int)($placement['y'] + $sy * $step))->getColor(2);
-                if (($color['a'] ?? 255) < 128) {
+                if ($color['a'] < 128) {
                     $luminances[] = 0.0;
                     $luminances[] = 1.0;
                     continue;
@@ -185,7 +194,7 @@ final class ImageLabelCompositor implements LoggerAwareInterface
         $choice = Contrast::chooseVariant($luminances);
         $size = $placement['size'];
         $draw = function (string $colour, int $x, int $y, int $symbolSize) use ($image): void {
-            $symbol = new \Imagick(self::symbolPath($colour));
+            $symbol = new \Imagick(self::symbolPath($colour, $this->symbol));
             $symbol->resizeImage($symbolSize, $symbolSize, \Imagick::FILTER_LANCZOS, 1);
             $image->compositeImage($symbol, \Imagick::COMPOSITE_OVER, $x, $y);
             $symbol->clear();

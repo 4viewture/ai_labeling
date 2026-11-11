@@ -1,5 +1,7 @@
 # AI Labeling – EU AI Act Art. 50 for TYPO3
 
+[![CI](https://github.com/4viewture/ai_labeling/actions/workflows/ci.yml/badge.svg)](https://github.com/4viewture/ai_labeling/actions/workflows/ci.yml)
+
 `4viewture/ai-labeling` (extension key `ai_labeling`) adds transparency fields for AI-generated or
 AI-modified content to **file metadata** (`sys_file_metadata`), **content elements** (`tt_content`)
 and **all other eligible record tables** (pages, news, …), following the guide
@@ -104,12 +106,22 @@ else the default text in the **site language of the request**.
 | `css.include` | 1 | include `ai-label.css` (`page.includeCSS`) |
 | `content.enable` | 1 | label content elements (`tt_content.stdWrap.postUserFunc`) |
 | `label.text` | `visible` | `hidden` = text only for screen readers (`ai-label__text--sr-only`), icon visible |
+| `label.symbol` | `ai` | `ai` (EU icon), `ki` (German variant, not an official EU icon), `auto` (KI on German site languages) |
 | `label.secondLayer` | 0 | disclosure button with explanation (Popover API, `ai-label.js` keeps `aria-expanded` in sync) |
 | `images.burnIn` | 1 | burn the EU "AI" symbol into processed frontend images |
 | `images.position` | `top-right` | `top-right`, `top-left`, `bottom-right`, `bottom-left` |
 | `images.sizePercent` / `minSize` / `maxSize` | 8 / 24 / 96 | symbol size: % of the shorter edge, clamped (px) |
 | `images.altText` | 1 | append the label text to non-empty `alt`, add the label to `<figcaption>` |
+| `images.symbol` | `ai` | burned-in symbol `ai` or `ki` (no `auto`: processed files are shared by all languages) |
 | `media.overlay` | 1 | label as overlay at the top of videos; 0 = label below the player |
+
+### German icon variants ("KI")
+
+`Resources/Public/Icons/EU/ki-*.svg` ("KI", "KI GENERIERT", "KI VERÄNDERT"; black, white, 50 %) are
+generated from the official files by `Build/generate-german-icons.py`: official letters are reused,
+only K, V and Ä come from Rubik (the typeface of the artwork, SIL OFL 1.1) at matching weight, cap
+height and tracking. They are **not official EU icons** – the Code of Practice (Measure 1.1 a) uses
+"AI" unless English is incompatible with national language law, hence `ai` is the default.
 
 ### Label component
 
@@ -330,10 +342,29 @@ Compatibility notes (verified against the core sources of 12.4, 13.4 and 14.3; F
 - Record overlay only when the core shows no status overlay (hidden etc. win) and only where the
   rendered row contains the AI fields (not in the page tree).
 
-## Tests
+## Tests and QA
+
+GitHub Actions (`.github/workflows/ci.yml`) on push, pull requests and weekly:
+
+| Job | Content |
+|---|---|
+| PHP lint | `php -l` on PHP 8.1 – 8.5 |
+| Composer, XLIFF, YAML, SVG | `composer validate`, well-formed XLIFF/SVG, de/en trans-unit ids match, yamllint |
+| Coding guidelines | php-cs-fixer (PER-CS 2.0 + TYPO3 conventions, `Build/php-cs-fixer.php`) |
+| TYPO3 12.4 / 13.4 / 14 × PHP | PHPStan level 5 (`Build/phpstan.neon`) and unit tests for each TYPO3 version |
+
+Locally (standalone checkout, dependencies in `.Build/`):
 
 ```bash
-vendor/bin/phpunit Tests/Unit
+composer install
+composer ci                 # validate, lint, cgl, phpstan, unit tests
+composer fix:php:cs         # apply coding guidelines
+```
+
+Inside a TYPO3 project:
+
+```bash
+vendor/bin/phpunit -c vendor/4viewture/ai-labeling/phpunit.xml.dist --bootstrap vendor/autoload.php
 ```
 
 The unit tests cover the decision logic, the detector (synthetic JPEG/XMP, PNG chunks, C2PA/CBOR,

@@ -31,6 +31,14 @@
 				<source>Second layer: button with an explanation next to the label</source>
 				<target state="translated">Zweite Ebene: Schaltfläche mit Erklärung neben der Kennzeichnung</target>
 			</trans-unit>
+			<trans-unit id="constants.label.symbol" resname="constants.label.symbol">
+				<source>Symbol of the label: ai (EU icon &quot;AI&quot;, default), ki (German variant &quot;KI&quot;), auto (KI on German site languages)</source>
+				<target state="translated">Symbol der Kennzeichnung: ai (EU-Icon „AI“, Standard), ki (deutsche Variante „KI“), auto (KI bei deutscher Seitensprache)</target>
+			</trans-unit>
+			<trans-unit id="constants.images.symbol" resname="constants.images.symbol">
+				<source>Burned-in symbol: ai (EU icon &quot;AI&quot;, default) or ki (German variant &quot;KI&quot;); clear processed files after changing</source>
+				<target state="translated">Eingebranntes Symbol: ai (EU-Icon „AI“, Standard) oder ki (deutsche Variante „KI“); danach verarbeitete Dateien leeren</target>
+			</trans-unit>
 			<trans-unit id="constants.images.burnIn" resname="constants.images.burnIn">
 				<source>Burn the AI symbol into processed images</source>
 				<target state="translated">KI-Symbol in verarbeitete Bilder einbrennen</target>

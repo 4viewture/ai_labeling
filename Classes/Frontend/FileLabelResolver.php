@@ -55,11 +55,10 @@ final class FileLabelResolver
     }
 
     /**
-     * File type as int (v14 may return the FileType enum instead of int).
+     * FAL file type as int (getType(): int in 12.4–14.3; no AbstractFile::FILETYPE_* constants).
      */
     public static function fileType(FileInterface $file): int
     {
-        $type = $file instanceof File || $file instanceof FileReference ? $file->getType() : 0;
-        return $type instanceof \BackedEnum ? (int)$type->value : (int)$type;
+        return $file instanceof File || $file instanceof FileReference ? (int)$file->getType() : 0;
     }
 }

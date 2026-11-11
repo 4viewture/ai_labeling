@@ -18,8 +18,7 @@ trait RequestFromRenderingContext
     private static function requestFromContext(RenderingContextInterface $context): ?ServerRequestInterface
     {
         if (method_exists($context, 'hasAttribute') && $context->hasAttribute(ServerRequestInterface::class)) {
-            $request = $context->getAttribute(ServerRequestInterface::class);
-            return $request instanceof ServerRequestInterface ? $request : null;
+            return $context->getAttribute(ServerRequestInterface::class);
         }
         if (method_exists($context, 'getRequest')) {
             $request = $context->getRequest();

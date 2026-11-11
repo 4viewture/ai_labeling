@@ -6,6 +6,7 @@ plugin.tx_ailabeling.settings {
     label {
         text = {$plugin.tx_ailabeling.label.text}
         secondLayer = {$plugin.tx_ailabeling.label.secondLayer}
+        symbol = {$plugin.tx_ailabeling.label.symbol}
     }
     images {
         burnIn = {$plugin.tx_ailabeling.images.burnIn}
@@ -14,6 +15,7 @@ plugin.tx_ailabeling.settings {
         minSize = {$plugin.tx_ailabeling.images.minSize}
         maxSize = {$plugin.tx_ailabeling.images.maxSize}
         altText = {$plugin.tx_ailabeling.images.altText}
+        symbol = {$plugin.tx_ailabeling.images.symbol}
     }
     media.overlay = {$plugin.tx_ailabeling.media.overlay}
 }

@@ -15,6 +15,9 @@ final class LabelSettings
 {
     public const POSITIONS = ['top-right', 'top-left', 'bottom-right', 'bottom-left'];
 
+    /** Acronym of the symbol: EU original "AI" or German variant "KI" (Build/generate-german-icons.py) */
+    public const SYMBOLS = ['ai', 'ki'];
+
     /**
      * Defaults. Placement: Code of Practice on Transparency of AI-Generated Content (10 June 2026),
      * Section 2, Sub-measure 1.2.2 a) – "e.g., in the top right corner of an image or video deep fake".
@@ -26,12 +29,14 @@ final class LabelSettings
         'content.enable' => true,
         'label.text' => 'visible',
         'label.secondLayer' => false,
+        'label.symbol' => 'ai',
         'images.burnIn' => true,
         'images.position' => 'top-right',
         'images.sizePercent' => 8,
         'images.minSize' => 24,
         'images.maxSize' => 96,
         'images.altText' => true,
+        'images.symbol' => 'ai',
         'media.overlay' => true,
     ];
 
@@ -90,6 +95,29 @@ final class LabelSettings
         return $this->bool('label.secondLayer');
     }
 
+    /**
+     * Symbol of the HTML label: "ai", "ki" or "auto" (= "ki" for German site languages).
+     * The Code of Practice (Measure 1.1 a) asks for the English acronym "AI" unless national language
+     * law requires otherwise – default "ai".
+     */
+    public function labelSymbol(string $languageCode = ''): string
+    {
+        $value = strtolower(trim((string)$this->values['label.symbol']));
+        if ($value === 'auto') {
+            return strtolower($languageCode) === 'de' ? 'ki' : 'ai';
+        }
+        return in_array($value, self::SYMBOLS, true) ? $value : 'ai';
+    }
+
+    /**
+     * Burned-in symbol: "ai" or "ki". Processed files are shared by all languages – no "auto".
+     */
+    public function imageSymbol(): string
+    {
+        $value = strtolower(trim((string)$this->values['images.symbol']));
+        return in_array($value, self::SYMBOLS, true) ? $value : 'ai';
+    }
+
     public function burnIn(): bool
     {
         return $this->bool('images.burnIn');
@@ -130,11 +158,12 @@ final class LabelSettings
     /**
      * Values that influence the burned-in result (part of the processed file identity, see README).
      *
-     * @return array{position: string, sizePercent: float, minSize: int, maxSize: int}
+     * @return array{position: string, sizePercent: float, minSize: int, maxSize: int, symbol: string}
      */
     public function burnInParameters(): array
     {
         return [
+            'symbol' => $this->imageSymbol(),
             'position' => $this->imagePosition(),
             'sizePercent' => $this->imageSizePercent(),
             'minSize' => $this->imageMinSize(),

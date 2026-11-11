@@ -65,6 +65,15 @@ final class FrontendContext
         return $this->getSiteLanguage($request)?->getLanguageId() ?? 0;
     }
 
+    /**
+     * ISO 639-1 code of the site language ("de", "en" …); Locale::getLanguageCode() exists in 12.4–14.3.
+     */
+    public function getLanguageCode(?ServerRequestInterface $request = null): string
+    {
+        $siteLanguage = $this->getSiteLanguage($request);
+        return $siteLanguage !== null ? strtolower($siteLanguage->getLocale()->getLanguageCode()) : '';
+    }
+
     public function getLanguageService(?ServerRequestInterface $request = null): LanguageService
     {
         $siteLanguage = $this->getSiteLanguage($request);

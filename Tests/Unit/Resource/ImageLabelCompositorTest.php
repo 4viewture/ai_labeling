@@ -63,6 +63,20 @@ final class ImageLabelCompositorTest extends TestCase
     }
 
     #[Test]
+    public function germanSymbolIsBurnedInWithSamePlacement(): void
+    {
+        $paint = static fn($i) => imagefill($i, 0, 0, imagecolorallocate($i, 250, 250, 250));
+        $ai = $this->image('png', 1200, 800, $paint);
+        $ki = $this->image('png', 1200, 800, $paint);
+        (new ImageLabelCompositor())->composite($ai, self::PARAMETERS);
+        (new ImageLabelCompositor())->composite($ki, self::PARAMETERS + ['symbol' => 'ki']);
+        self::assertNotSame(md5_file($ai), md5_file($ki), 'different letters');
+        // disc edge identical
+        self::assertLessThan(0.05, self::luminanceAt($ki, 1152, 20));
+        self::assertFileExists(ImageLabelCompositor::symbolPath('white', 'ki'));
+    }
+
+    #[Test]
     public function burnsWhiteSymbolIntoDarkImage(): void
     {
         $file = $this->image('png', 800, 600, static fn($i) => imagefill($i, 0, 0, imagecolorallocate($i, 10, 20, 40)));
