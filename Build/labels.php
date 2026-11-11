@@ -72,6 +72,24 @@ $set = [
     'settings.description.plugin.tx_ailabeling.media.overlay' => ['Shows the label at the top of the player (never over the controls). Off: label below the player.', 'Zeigt die Kennzeichnung oben im Player (nie über der Steuerleiste). Aus: Kennzeichnung unter dem Player.'],
 ];
 
+$backend = [
+    'contextMenu.scan' => ['Scan for AI content', 'Auf KI-Inhalte prüfen'],
+    'scan.title' => ['AI content scan: %s', 'KI-Prüfung: %s'],
+    'scan.notFound' => ['No AI provenance metadata found in this file. Editing tools and social networks often remove such metadata – please check the content yourself.', 'In dieser Datei wurden keine KI-Herkunftsangaben gefunden. Bearbeitungsprogramme und soziale Netzwerke entfernen solche Metadaten oft – bitte prüfen Sie den Inhalt trotzdem selbst.'],
+    'scan.found' => ['AI provenance metadata found. Apply the following changes?', 'KI-Herkunftsangaben gefunden. Folgende Änderungen übernehmen?'],
+    'scan.noChanges' => ['AI provenance metadata found, the AI labelling of this file is already up to date.', 'KI-Herkunftsangaben gefunden, die KI-Kennzeichnung dieser Datei ist bereits aktuell.'],
+    'scan.applied' => ['The AI labelling of this file was updated.', 'Die KI-Kennzeichnung dieser Datei wurde aktualisiert.'],
+    'scan.manual' => ['The AI involvement was maintained manually and is kept; only the evidence is updated.', 'Der Einsatz von KI wurde manuell gepflegt und bleibt erhalten; nur die Merkmale werden aktualisiert.'],
+    'scan.evidence' => ['Evidence', 'Merkmale'],
+    'scan.changes' => ['Changes', 'Änderungen'],
+    'scan.apply' => ['Apply', 'Übernehmen'],
+    'scan.close' => ['Close', 'Schließen'],
+    'scan.yes' => ['yes', 'ja'],
+    'scan.no' => ['no', 'nein'],
+    'scan.error' => ['The file could not be scanned.', 'Die Datei konnte nicht geprüft werden.'],
+    'scan.denied' => ['You are not allowed to edit the AI labelling of this file.', 'Sie dürfen die KI-Kennzeichnung dieser Datei nicht bearbeiten.'],
+];
+
 function xlf(string $original, array $labels, ?string $lang): string
 {
     $out = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
@@ -93,6 +111,9 @@ $base = dirname(__DIR__);
 $f = 'EXT:ai_labeling/Resources/Private/Language/locallang.xlf';
 file_put_contents($base . '/Resources/Private/Language/locallang.xlf', xlf($f, $frontend, null));
 file_put_contents($base . '/Resources/Private/Language/de.locallang.xlf', xlf($f, $frontend, 'de'));
+$b = 'EXT:ai_labeling/Resources/Private/Language/locallang_be.xlf';
+file_put_contents($base . '/Resources/Private/Language/locallang_be.xlf', xlf($b, $backend, null));
+file_put_contents($base . '/Resources/Private/Language/de.locallang_be.xlf', xlf($b, $backend, 'de'));
 $s = 'EXT:ai_labeling/Configuration/Sets/AiLabeling/labels.xlf';
 file_put_contents($base . '/Configuration/Sets/AiLabeling/labels.xlf', xlf($s, $set, null));
 file_put_contents($base . '/Configuration/Sets/AiLabeling/de.labels.xlf', xlf($s, $set, 'de'));

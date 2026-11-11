@@ -89,7 +89,7 @@ services:
     tags:
       - name: console.command
         command: 'ailabeling:scan'
-        description: 'Detect AI-generated files from metadata and label them (EU AI Act Art. 50)'
+        description: '(Re)scan existing files for AI provenance metadata and label them (EU AI Act Art. 50); --dry-run shows the planned changes'
         schedulable: true
 
   # FLUIDTEMPLATE / PAGEVIEW: dataProcessing.10 = ai-label
@@ -110,3 +110,7 @@ services:
       - name: event.listener
         identifier: 'ai-labeling/label-images-in-content'
         event: TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent
+
+  # AJAX endpoint of the file list context menu action "Scan for AI content"
+  FourViewture\AiLabeling\Controller\FileScanController:
+    public: true

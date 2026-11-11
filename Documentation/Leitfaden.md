@@ -125,6 +125,12 @@ Hochladen bzw. Ersetzen einer Datei aus:
 Wird etwas gefunden, setzt TYPO3 „Einsatz von KI“, das Werkzeug und **„Immer kennzeichnen“**
 und zeigt die gefundenen Merkmale im Bereich „Automatische Erkennung“ an.
 
+**Vorhandene Dateien nachträglich prüfen:** Rechtsklick auf eine Datei in der Dateiliste →
+**„Auf KI-Inhalte prüfen“**. TYPO3 zeigt die gefundenen Merkmale und die geplanten Änderungen;
+erst mit **„Übernehmen“** wird gespeichert. Ihre eigenen Entscheidungen (z. B. „Keine KI“ nach
+einer automatischen Erkennung) bleiben dabei erhalten. Für ganze Ordner gibt es den Befehl
+`ailabeling:scan` (Integrator).
+
 **Bitte trotzdem prüfen:** Metadaten gehen beim Bearbeiten, Exportieren oder durch Social-Media-
 Plattformen oft verloren. Fehlen sie, erkennt die Erweiterung nichts – die Verantwortung für
 die sichtbare Kennzeichnung bleibt bei Ihnen. Umgekehrt kann ein Werkzeugname in einer

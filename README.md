@@ -52,7 +52,26 @@ Editor guide (German): [Documentation/Leitfaden.md](Documentation/Leitfaden.md)
     list (metadata fields, readOnly – not part of the edit form).
   - TYPO3 14+: text badge in the name column and `data-ai-labeling*` row attributes via
     `AfterFileListRowPreparedEvent`.
-- CLI / scheduler command for existing files: `vendor/bin/typo3 ailabeling:scan [--dry-run] [--storage=1] [--limit=500] [--override-manual]`
+- **Rescan existing files** (CLI / scheduler), same detection as on upload:
+
+  ```bash
+  vendor/bin/typo3 ailabeling:scan --dry-run                  # planned changes per file, nothing written
+  vendor/bin/typo3 ailabeling:scan --folder=1:/user_upload/   # one folder, recursive
+  vendor/bin/typo3 ailabeling:scan --file=123 --file=1:/a.jpg # single files (uid or combined identifier)
+  vendor/bin/typo3 ailabeling:scan --skip-detected            # only files never detected before
+  vendor/bin/typo3 ailabeling:scan --storage=1 --limit=500 [--override-manual] [-v]
+  ```
+
+  Output: table of changed files (involvement / mode / label active as `old → new`, tool, evidence) and
+  a summary (scanned, found, changed, up to date, manual decisions kept, errors). Editorial decisions
+  are kept: an involvement set by an editor, or changed after an earlier detection (also to "no AI"),
+  is not overwritten without `--override-manual` – only the evidence is updated. Label changes
+  invalidate processed images and page caches. Roughly 0.3 s per file (contents are read up to
+  `scanLimitMb`).
+- **File list context menu "Scan for AI content"** (files of type image, audio, video, application):
+  shows the evidence and the planned changes in a modal (like `--dry-run`), **Apply** writes them and
+  reloads the file list. Only for users who may edit the file metadata and the AI fields
+  (`tables_modify` on `sys_file_metadata` and the exclude field `tx_ailabeling_involvement`).
 
 ## Installation
 
@@ -312,7 +331,8 @@ Classes/
   Imaging/Contrast.php               WCAG contrast, symbol variant and placement
   Service/LabelInvalidator.php       processed files + page cache of a file
   Form/Element/GuideInformation.php  FormEngine fieldWizard: guide + live assessment
-  Command/ScanCommand.php            ailabeling:scan
+  Command/ScanCommand.php            ailabeling:scan (rescan, --dry-run)
+  ContextMenu/, Controller/          file list context menu "Scan for AI content" + AJAX endpoint
 ```
 
 Compatibility notes (verified against the core sources of 12.4, 13.4 and 14.3; Fluid 2.15 / 5.x):

@@ -7,6 +7,7 @@ namespace FourViewture\AiLabeling\Service;
 use FourViewture\AiLabeling\Detection\AiContentDetector;
 use FourViewture\AiLabeling\Domain\DetectionResult;
 use FourViewture\AiLabeling\Domain\Labeling;
+use FourViewture\AiLabeling\Domain\ScanPlan;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -40,18 +41,37 @@ final class AutoLabeler implements LoggerAwareInterface
     }
 
     /**
+     * Upload/replace detection and CLI scan: analyse, plan and (unless dry run) write.
+     *
      * @param bool $persist false = dry run
      * @param bool $overrideManual true = also overwrite manually maintained decisions
      */
     public function process(File $file, bool $persist = true, bool $overrideManual = false): ?DetectionResult
     {
-        if (!in_array($this->getFileType($file), self::SUPPORTED_TYPES, true)) {
+        $result = $this->analyse($file);
+        if ($result === null || !$persist) {
+            return $result;
+        }
+        $this->apply($file, $this->plan($file, $result, $overrideManual));
+        return $result;
+    }
+
+    public function supports(File $file): bool
+    {
+        return in_array($this->getFileType($file), self::SUPPORTED_TYPES, true);
+    }
+
+    /**
+     * Runs the detector on the file contents (no database changes).
+     */
+    public function analyse(File $file): ?DetectionResult
+    {
+        if (!$this->supports($file)) {
             return null;
         }
-
         try {
             $path = $file->getForLocalProcessing(false);
-            $result = $this->createDetector()->detectFile($path);
+            return $this->createDetector()->detectFile($path);
         } catch (\Throwable $e) {
             $this->logger?->warning('AI detection failed for file {uid}: {message}', [
                 'uid' => $file->getUid(),
@@ -59,15 +79,15 @@ final class AutoLabeler implements LoggerAwareInterface
             ]);
             return null;
         }
+    }
 
-        if ($result === null || !$persist) {
-            return $result;
-        }
-
-        $metaData = $file->getMetaData();
-        $current = $metaData->get();
-        $manuallyMaintained = (int)($current[Labeling::F_INVOLVEMENT] ?? 0) > 0
-            && (int)($current[Labeling::F_DETECTED] ?? 0) === 0;
+    /**
+     * Metadata values the detection result leads to (no database changes) – the basis of dry runs.
+     */
+    public function plan(File $file, DetectionResult $result, bool $overrideManual = false): ScanPlan
+    {
+        $current = $file->getMetaData()->get();
+        $manuallyMaintained = self::isManuallyMaintained($current, $result);
 
         $values = [
             Labeling::F_DETECTED => 1,
@@ -87,24 +107,46 @@ final class AutoLabeler implements LoggerAwareInterface
         }
 
         $assessment = $this->evaluator->evaluate(array_merge($current, $values));
-        $values = array_merge($values, $assessment->toFields());
+        return new ScanPlan($result, $current, array_merge($values, $assessment->toFields()), $manuallyMaintained);
+    }
 
-        $metaData->add($values)->save();
+    /**
+     * Writes a plan; invalidates processed files and page caches if the label state changes.
+     */
+    public function apply(File $file, ScanPlan $plan): void
+    {
+        if (!$plan->hasChanges()) {
+            return;
+        }
+        $file->getMetaData()->add($plan->values)->save();
 
         // Label state changed -> processed files (burned-in symbol) and cached pages are outdated
-        if ((int)($current[Labeling::F_ACTIVE] ?? 0) !== (int)($values[Labeling::F_ACTIVE] ?? $current[Labeling::F_ACTIVE] ?? 0)
-            || (int)($current[Labeling::F_INVOLVEMENT] ?? 0) !== (int)($values[Labeling::F_INVOLVEMENT] ?? $current[Labeling::F_INVOLVEMENT] ?? 0)
-        ) {
+        if ($plan->changesLabelState()) {
             $this->invalidator->invalidateFile($file->getUid());
         }
 
         $this->logger?->info('AI content detected in file {uid} ({identifier}): {evidence}', [
             'uid' => $file->getUid(),
             'identifier' => $file->getIdentifier(),
-            'evidence' => $result->evidenceAsText(),
+            'evidence' => $plan->result->evidenceAsText(),
         ]);
+    }
 
-        return $result;
+    /**
+     * Editorial decisions survive (re)scans:
+     * - never detected before: an involvement set by an editor (> 0) is manual
+     * - detected before: an involvement that differs from the detection result was changed by an
+     *   editor afterwards (incl. "no AI" = 0) – equal values need no change anyway
+     *
+     * @param array<string, mixed> $current
+     */
+    public static function isManuallyMaintained(array $current, DetectionResult $result): bool
+    {
+        $involvement = (int)($current[Labeling::F_INVOLVEMENT] ?? 0);
+        if ((int)($current[Labeling::F_DETECTED] ?? 0) === 0) {
+            return $involvement > 0;
+        }
+        return $involvement !== $result->involvement;
     }
 
     private function createDetector(): AiContentDetector

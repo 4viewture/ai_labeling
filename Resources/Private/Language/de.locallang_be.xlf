@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:ai_labeling/Resources/Private/Language/locallang_be.xlf" product-name="ai_labeling">
+		<header/>
+		<body>
+			<trans-unit id="contextMenu.scan" resname="contextMenu.scan">
+				<source>Scan for AI content</source>
+				<target state="translated">Auf KI-Inhalte prüfen</target>
+			</trans-unit>
+			<trans-unit id="scan.title" resname="scan.title">
+				<source>AI content scan: %s</source>
+				<target state="translated">KI-Prüfung: %s</target>
+			</trans-unit>
+			<trans-unit id="scan.notFound" resname="scan.notFound">
+				<source>No AI provenance metadata found in this file. Editing tools and social networks often remove such metadata – please check the content yourself.</source>
+				<target state="translated">In dieser Datei wurden keine KI-Herkunftsangaben gefunden. Bearbeitungsprogramme und soziale Netzwerke entfernen solche Metadaten oft – bitte prüfen Sie den Inhalt trotzdem selbst.</target>
+			</trans-unit>
+			<trans-unit id="scan.found" resname="scan.found">
+				<source>AI provenance metadata found. Apply the following changes?</source>
+				<target state="translated">KI-Herkunftsangaben gefunden. Folgende Änderungen übernehmen?</target>
+			</trans-unit>
+			<trans-unit id="scan.noChanges" resname="scan.noChanges">
+				<source>AI provenance metadata found, the AI labelling of this file is already up to date.</source>
+				<target state="translated">KI-Herkunftsangaben gefunden, die KI-Kennzeichnung dieser Datei ist bereits aktuell.</target>
+			</trans-unit>
+			<trans-unit id="scan.applied" resname="scan.applied">
+				<source>The AI labelling of this file was updated.</source>
+				<target state="translated">Die KI-Kennzeichnung dieser Datei wurde aktualisiert.</target>
+			</trans-unit>
+			<trans-unit id="scan.manual" resname="scan.manual">
+				<source>The AI involvement was maintained manually and is kept; only the evidence is updated.</source>
+				<target state="translated">Der Einsatz von KI wurde manuell gepflegt und bleibt erhalten; nur die Merkmale werden aktualisiert.</target>
+			</trans-unit>
+			<trans-unit id="scan.evidence" resname="scan.evidence">
+				<source>Evidence</source>
+				<target state="translated">Merkmale</target>
+			</trans-unit>
+			<trans-unit id="scan.changes" resname="scan.changes">
+				<source>Changes</source>
+				<target state="translated">Änderungen</target>
+			</trans-unit>
+			<trans-unit id="scan.apply" resname="scan.apply">
+				<source>Apply</source>
+				<target state="translated">Übernehmen</target>
+			</trans-unit>
+			<trans-unit id="scan.close" resname="scan.close">
+				<source>Close</source>
+				<target state="translated">Schließen</target>
+			</trans-unit>
+			<trans-unit id="scan.yes" resname="scan.yes">
+				<source>yes</source>
+				<target state="translated">ja</target>
+			</trans-unit>
+			<trans-unit id="scan.no" resname="scan.no">
+				<source>no</source>
+				<target state="translated">nein</target>
+			</trans-unit>
+			<trans-unit id="scan.error" resname="scan.error">
+				<source>The file could not be scanned.</source>
+				<target state="translated">Die Datei konnte nicht geprüft werden.</target>
+			</trans-unit>
+			<trans-unit id="scan.denied" resname="scan.denied">
+				<source>You are not allowed to edit the AI labelling of this file.</source>
+				<target state="translated">Sie dürfen die KI-Kennzeichnung dieser Datei nicht bearbeiten.</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

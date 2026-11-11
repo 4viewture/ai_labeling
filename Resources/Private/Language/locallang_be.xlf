@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:ai_labeling/Resources/Private/Language/locallang_be.xlf" product-name="ai_labeling">
+		<header/>
+		<body>
+			<trans-unit id="contextMenu.scan" resname="contextMenu.scan">
+				<source>Scan for AI content</source>
+			</trans-unit>
+			<trans-unit id="scan.title" resname="scan.title">
+				<source>AI content scan: %s</source>
+			</trans-unit>
+			<trans-unit id="scan.notFound" resname="scan.notFound">
+				<source>No AI provenance metadata found in this file. Editing tools and social networks often remove such metadata – please check the content yourself.</source>
+			</trans-unit>
+			<trans-unit id="scan.found" resname="scan.found">
+				<source>AI provenance metadata found. Apply the following changes?</source>
+			</trans-unit>
+			<trans-unit id="scan.noChanges" resname="scan.noChanges">
+				<source>AI provenance metadata found, the AI labelling of this file is already up to date.</source>
+			</trans-unit>
+			<trans-unit id="scan.applied" resname="scan.applied">
+				<source>The AI labelling of this file was updated.</source>
+			</trans-unit>
+			<trans-unit id="scan.manual" resname="scan.manual">
+				<source>The AI involvement was maintained manually and is kept; only the evidence is updated.</source>
+			</trans-unit>
+			<trans-unit id="scan.evidence" resname="scan.evidence">
+				<source>Evidence</source>
+			</trans-unit>
+			<trans-unit id="scan.changes" resname="scan.changes">
+				<source>Changes</source>
+			</trans-unit>
+			<trans-unit id="scan.apply" resname="scan.apply">
+				<source>Apply</source>
+			</trans-unit>
+			<trans-unit id="scan.close" resname="scan.close">
+				<source>Close</source>
+			</trans-unit>
+			<trans-unit id="scan.yes" resname="scan.yes">
+				<source>yes</source>
+			</trans-unit>
+			<trans-unit id="scan.no" resname="scan.no">
+				<source>no</source>
+			</trans-unit>
+			<trans-unit id="scan.error" resname="scan.error">
+				<source>The file could not be scanned.</source>
+			</trans-unit>
+			<trans-unit id="scan.denied" resname="scan.denied">
+				<source>You are not allowed to edit the AI labelling of this file.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
