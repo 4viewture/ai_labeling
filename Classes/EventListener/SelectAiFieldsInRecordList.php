@@ -21,10 +21,11 @@ final class SelectAiFieldsInRecordList
         if (!LabelingTables::isLabeled($table)) {
             return;
         }
-        $queryBuilder = $event->getQueryBuilder();
-        $queryBuilder->addSelect(
-            $queryBuilder->quoteIdentifier($table . '.' . Labeling::F_ACTIVE),
-            $queryBuilder->quoteIdentifier($table . '.' . Labeling::F_INVOLVEMENT),
+        // addSelect() quotes the identifiers itself – passing pre-quoted names results in
+        // "Unknown column '`pages`.`tx_ailabeling_active`'"
+        $event->getQueryBuilder()->addSelect(
+            $table . '.' . Labeling::F_ACTIVE,
+            $table . '.' . Labeling::F_INVOLVEMENT,
         );
     }
 }
